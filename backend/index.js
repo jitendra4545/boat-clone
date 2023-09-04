@@ -1,7 +1,12 @@
 const express = require('express')
 const { connection } = require('./config/db')
+const { UserRouter } = require('./routes/UserRoute')
 const app = express()
+app.use(express.json())
 require('dotenv').config()
+app.use("/user",UserRouter)
+
+
 
 app.get('/',(req,res)=>{
 res.send(`Welcome to boat LifeStyle`)

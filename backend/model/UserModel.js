@@ -3,14 +3,18 @@ const mongoose=require(`mongoose`)
 
 
 const UserSchema=mongoose.Schema({
-    name:{type:String,required:true},
-    email:{type:String,required:true},
+    f_name:{type:String,required:true},
+    l_name:{type:String,required:true},
+    email:{type:String,required:true,unique: true},
     mobile:{type:Number,required:true},
     password:{type:String,require:true},
-    confirm_password:{type:String,require:true}
+    isActive:{type:Boolean}
+},{
+    versionKey:false,
+    timestamps:true
 })
 
-const UserModel=mongoose.model("boat_user",UserSchema)
+const UserModel=mongoose.model("boatuser",UserSchema)
 
 module.exports={
     UserModel
