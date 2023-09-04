@@ -42,7 +42,7 @@ UserRouter.post("/login", async (req, res) => {
 if(SingleData){
     bcrypt.compare(data.password,SingleData.password, async function(err, result) {
    if(result){
-    let token = jwt.sign({ boat: 'lifestyle' }, 'BOAT');
+    let token = jwt.sign({ UserId:SingleData._id}, 'BOAT');
     await UserModel.findByIdAndUpdate({_id:SingleData._id},{isActive:true})
     res.send({"msg":"Login Successfull","token":token})
    }else{
@@ -51,7 +51,7 @@ if(SingleData){
     });
 }
         } catch (err) {
-console.log('failed')
+            res.send({ "msg": "somthing went wrong! cannot login", "error": err.message })
     }
 })
 

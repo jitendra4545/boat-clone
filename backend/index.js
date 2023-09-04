@@ -2,11 +2,12 @@ const express = require('express')
 const { connection } = require('./config/db')
 const { UserRouter } = require('./routes/UserRoute')
 const { ProductModel } = require('./model/ProductModel')
+const { ProductRouter } = require('./routes/ProductRoute')
 const app = express()
 app.use(express.json())
 require('dotenv').config()
 app.use("/user", UserRouter)
-
+app.use('/product',ProductRouter)
 
 
 app.get('/', (req, res) => {
