@@ -1,18 +1,29 @@
 const express = require('express')
 const { connection } = require('./config/db')
 const { UserRouter } = require('./routes/UserRoute')
+const { ProductModel } = require('./model/ProductModel')
 const app = express()
 app.use(express.json())
 require('dotenv').config()
-app.use("/user",UserRouter)
+app.use("/user", UserRouter)
 
 
 
-app.get('/',(req,res)=>{
-res.send(`Welcome to boat LifeStyle`)
+app.get('/', (req, res) => {
+    res.send(`Welcome to boat LifeStyle`)
 })
 
-
+app.post('/addmore', async (req, res) => {
+let data=req.body
+    console.log(data)
+    try {
+       let allData=await ProductModel.insertMany(data)
+       
+       res.send(allData)
+    } catch (err) {
+res.send(err)
+    }
+})
 
 app.listen(process.env.port, async () => {
     try {
