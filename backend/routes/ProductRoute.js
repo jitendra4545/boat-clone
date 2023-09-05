@@ -12,7 +12,7 @@ const ProductRouter = express.Router()
 
 
 
-ProductRouter.get("/", Authorization, async (req, res) => {
+ProductRouter.get("/", async (req, res) => {
     try {
         let allData = await ProductModel.find()
         res.send(allData)
@@ -73,7 +73,7 @@ ProductRouter.patch("/cart/:id", Authorization, async (req, res) => {
     }
 })
 
-// <----  THE CODE HEPLS TO DELETE ALL THE CART CART DATA ---->
+// <----  THE CODE HEPLS TO DELETE  THE CART CART DATA ---->
 
 
 ProductRouter.delete("/cart/:id", Authorization, async (req, res) => {
@@ -87,6 +87,26 @@ ProductRouter.delete("/cart/:id", Authorization, async (req, res) => {
     }
 
 })
+
+// <----  THE CODE HEPLS TO  EMPTY THE CART CART DATA ---->
+
+ProductRouter.delete("/cart",Authorization,async(req,res)=>{
+    let ID = req.body.UserId
+    console.log(ID) 
+    try{
+        await CartModel.deleteMany({UserId:ID})
+        res.send({ "msg": "Now Your Cart is empty" })
+    }catch(err){
+        res.send({ "msg": "somthing went wrong! cannot delete", "error": err.message })
+    }
+})
+
+
+
+
+
+
+
 
 
 module.exports = {
