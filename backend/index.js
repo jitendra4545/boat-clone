@@ -14,6 +14,9 @@ app.get('/', (req, res) => {
     res.send(`Welcome to boat LifeStyle`)
 })
 
+// <----  THE CODE HEPLS TO ADD MULTIPLE PRODUCTS AT ONCE  ---->
+
+
 app.post('/addmore', async (req, res) => {
 let data=req.body
     console.log(data)

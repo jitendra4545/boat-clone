@@ -10,6 +10,9 @@ UserRouter.get("/", (req, res) => {
     res.send('UserPage')
 })
 
+// <----  THE CODE HEPLS TO REGISTER A NEW USER ---->
+
+
 UserRouter.post("/register", async (req, res) => {
     let data = req.body
     console.log(data)
@@ -32,13 +35,14 @@ UserRouter.post("/register", async (req, res) => {
     }
 })
 
-
+// <----  THE CODE HEPLS TO LOGIN USER ---->
 
 UserRouter.post("/login", async (req, res) => {
     let data = req.body
     console.log(data)
     try {
          let SingleData=await UserModel.findOne({email:data.email})
+         console.log(SingleData)
 if(SingleData){
     bcrypt.compare(data.password,SingleData.password, async function(err, result) {
    if(result){
@@ -46,9 +50,11 @@ if(SingleData){
     await UserModel.findByIdAndUpdate({_id:SingleData._id},{isActive:true})
     res.send({"msg":"Login Successfull","token":token})
    }else{
-    console.log("unable to generate token")
+    res.send("unable to generate token")
    }
     });
+}else{
+res.send("Unable to find Data Register first")
 }
         } catch (err) {
             res.send({ "msg": "somthing went wrong! cannot login", "error": err.message })
