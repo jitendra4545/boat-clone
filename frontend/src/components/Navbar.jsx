@@ -4,11 +4,12 @@ import { ChevronDownIcon, HamburgerIcon, Search2Icon } from '@chakra-ui/icons'
 import { CgProfile } from 'react-icons/cg'
 import { BsCart4 } from 'react-icons/bs'
 import { useMediaQuery } from '@chakra-ui/react'
+import { Link } from 'react-router-dom'
 
 
 const navItems = [{
     name: "Products",
-    link: ""
+    link: "/product"
 },
 {
     name: "Daily Deals",
@@ -60,7 +61,7 @@ export const Navbar = () => {
                                 <TabList >
                                     {
                                         navItems.map((el) => {
-                                            return <Tab _hover={{fontWeight:'bold'}} fontSize={'15px'}>{el.name}</Tab>
+                                            return <Link to={el.link}><Tab _hover={{fontWeight:'bold'}} fontSize={'15px'}>{el.name}</Tab></Link>
                                         })
                                     }
 

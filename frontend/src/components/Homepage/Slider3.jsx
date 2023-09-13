@@ -1,6 +1,6 @@
-import { Box, Heading,Image, Text } from '@chakra-ui/react'
+import { Box, Button, Heading,Image, Text } from '@chakra-ui/react'
 import React from 'react'
-
+import {GrFormView} from 'react-icons/gr'
 const data=[
     {
         "name":"For Fitness",
@@ -29,11 +29,11 @@ export const Slider3 = () => {
     <Box w='95%' m='auto' display={'flex'} gap='7'>
         {
             data.map((el,i)=>{
-                return <Box>
+                return <Box textAlign={'center'}>
                     <Image src={el.img} />
                     <Box bg='blue.100' borderRadius={'0px 0px 10px 10px'} p={'25px 5px'}>
                     <Heading textAlign={'center'} fontSize={'2xl'}>{el.name}</Heading>
-                    <Text>view</Text>
+                    <Button bg={'blue.100'} color={'red.400'} >view </Button>
                         </Box>
 
 

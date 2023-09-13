@@ -119,7 +119,7 @@ export const Slider2 = () => {
   return (
     
     <>
-    <Box w='95%' m='auto'  overflowX={'scroll'} overflowY={'hidden'}>
+    <Box w='95%' m='auto'   overflowX={'scroll'} overflowY={'hidden'}>
       <Box p='0px 20px' display={'grid'} gridTemplateColumns={'repeat(17,1fr)'} gap='7' w='2500px'>
       {
         category.map((el, i) => {

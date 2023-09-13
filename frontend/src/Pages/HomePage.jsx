@@ -10,11 +10,13 @@ export const HomePage = () => {
   return (
     <Box>
         <Slider/>
-        
+        {/* Shop by Lifestyle    */}
         <Box textAlign={'left'}>
           <Text p='20px 10px' fontWeight={'semibold'} fontSize={'25px'}>Shop by <span style={{fontWeight:'bold',color:'red'}}>Categories</span></Text>
         <Slider2/>
+        <Text p='20px 10px' fontWeight={'semibold'} fontSize={'25px'}>Shop by <span style={{fontWeight:'bold',color:'red'}}>Lifestyle</span></Text>
         <Slider3/>
+        
         <Slider4/>
         </Box>
         
