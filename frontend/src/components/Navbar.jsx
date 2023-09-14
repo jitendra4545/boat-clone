@@ -3,12 +3,13 @@ import {
     ,
     Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon
 } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ChevronDownIcon, HamburgerIcon, Search2Icon } from '@chakra-ui/icons'
 import { CgProfile } from 'react-icons/cg'
 import { BsCart4 } from 'react-icons/bs'
 import { useMediaQuery } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 
 const navItems = [
@@ -41,12 +42,30 @@ export const Navbar = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef = React.useRef()
     const [isLargerThan800] = useMediaQuery('(min-width: 1100px)')
-    const [Data, setData] = useState(false)
+    // const [Data, setData] = useState(false)
+// const [token,setToken]=useState("")
+    
+//     console.log(isLargerThan800)
 
-    console.log(isLargerThan800)
+    const token=useSelector((store)=>store.AuthReducer.token)
+  console.log(token)
+
+// const handleLogout=()=>{
+//     localStorage.removeItem("token")
+// window.location.reload()
+// }
+
+// useEffect(()=>{
+//  let AuthToken=JSON.parse(localStorage.getItem("token"))
+//  setToken(AuthToken)
+
+// },[])
 
 
 
+
+
+// console.log(token)
     return (
         <Box position="sticky" zIndex={'1000'} bg={'#EDF4F5'} top='0' boxShadow={'lg'}>
 
@@ -117,7 +136,7 @@ export const Navbar = () => {
                                 <Portal>
 
                                     {
-                                        Data ? <PopoverContent>
+                                        token ? <PopoverContent>
 
                                             <PopoverArrow />
                                             <PopoverHeader color={'red'} fontWeight={'bold'}>Hi User !</PopoverHeader>
@@ -125,7 +144,9 @@ export const Navbar = () => {
                                             <PopoverBody>
                                                 <Text>Manage Your Order</Text>
                                                 <Text mt='15px'>Account</Text>
-                                                <Button mt='15px' w='100%' color='white' _hover={{ backgroundColor: "red" }} bg='red'>Logout</Button>
+                                                <Button 
+                                                onClick={handleLogout} 
+                                                mt='15px' w='100%' color='white' _hover={{ backgroundColor: "red" }} bg='red'>Logout</Button>
                                             </PopoverBody>
                                             {/* <PopoverFooter>This is the footer</PopoverFooter> */}
                                         </PopoverContent>
@@ -136,7 +157,7 @@ export const Navbar = () => {
                                                 <PopoverHeader color={'red'} >Hi boAthead!</PopoverHeader>
                                                 <PopoverCloseButton color={'red'} />
                                                 <PopoverBody textAlign={'center'}>
-                                                    <Link to='/login'> <Button w='100%' onClick={onClose} color='white' _hover={{ backgroundColor: "red" }} bg='red'>Login</Button></Link>
+                                                    <Link to='/login'> <Button w='100%'  onClick={onClose} color='white' _hover={{ backgroundColor: "red" }} bg='red'>Login</Button></Link>
 
                                                 </PopoverBody>
                                                 {/* <PopoverFooter>This is the footer</PopoverFooter> */}
@@ -210,7 +231,7 @@ export const Navbar = () => {
 
                                     </AccordionButton>
                                     {
-                                        Data ? <AccordionPanel pb={4}>
+                                        token ? <AccordionPanel pb={4}>
                                             <Text fontWeight={'bold'} color={'red'}>Hi User !</Text>
                                             <Text fontSize={'15px'}>Manage Your Order</Text>
                                             <Text fontSize={'15px'} mt='15px'>Account</Text>

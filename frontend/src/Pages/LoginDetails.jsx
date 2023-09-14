@@ -12,14 +12,43 @@ import {
   Stack,
   Image,
 } from '@chakra-ui/react'
-import { Link } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
+import { GetUser, UserLogin } from '../redux/Authreducer/action'
 
 export default function LoginDetails() {
+
+  const [email, setemail] = useState("")
+  const [password, setpassword] = useState("")
+
+  const {token,user}=useSelector((store)=>store.AuthReducer)
+  console.log(token,user)
+
+
+  const dispatch=useDispatch()
+const navigate=useNavigate()
+  const handleLogin=async()=>{
+      dispatch(UserLogin({email,password})).then(()=>{
+      // if(JSON.parse(localStorage.getItem("token"))){
+        navigate("/")
+      // }else{
+      //   alert('Token Not Found')
+      // }
+         
+       
+      })
+  }
+
+useEffect(()=>{
+ dispatch(GetUser())
+},[])
+
   return (
     <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
       <Flex flex={1}>
         <Image
-        // w='100%'
+          // w='100%'
           alt={'Login Image'}
           objectFit={'cover'}
           src={
@@ -32,11 +61,11 @@ export default function LoginDetails() {
           <Heading fontSize={'2xl'}>Sign in to your account</Heading>
           <FormControl id="email">
             <FormLabel>Email address</FormLabel>
-            <Input type="email" />
+            <Input onChange={(e)=>setemail(e.target.value)} type="email" />
           </FormControl>
           <FormControl id="password">
             <FormLabel>Password</FormLabel>
-            <Input type="password" />
+            <Input onChange={(e)=>setpassword(e.target.value)} type="password" />
           </FormControl>
           <Stack spacing={6}>
             <Stack
@@ -46,15 +75,15 @@ export default function LoginDetails() {
               <Checkbox>Remember me</Checkbox>
               <Text color={'blue.500'}>Forgot password?</Text>
             </Stack>
-            <Text textAlign={'left'}>Don't Have Any Account ? <Link to='/register'><span style={{color:'Blue'}}>Register here</span> </Link></Text>
-            <Button color={'white'} bg={'blue'} _hover={{backgroundColor:"blue"}}  variant={'solid'}>
+            <Text textAlign={'left'}>Don't Have Any Account ? <Link to='/register'><span style={{ color: 'Blue' }}>Register here</span> </Link></Text>
+            <Button onClick={handleLogin} color={'white'} bg={'blue'} _hover={{ backgroundColor: "blue" }} variant={'solid'}>
               Sign in
             </Button>
-            
+
           </Stack>
         </Stack>
       </Flex>
-      
+
     </Stack>
   )
 }

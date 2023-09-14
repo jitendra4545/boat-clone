@@ -28,8 +28,10 @@ const [isAdmin, setAdmin] = useState(false)
 const dispatch=useDispatch()
 const navigate=useNavigate()
 // console.log(password)
+// console.log(UserRegister())
 const handleRegister=async()=>{
-     dispatch(UserRegister({name,email,password,isAdmin,mobile})).then(()=>{
+     dispatch(UserRegister({name,email,password,isAdmin,mobile})).then((res)=>{
+     console.log(res)
         navigate('/login')
      })
 }
@@ -83,7 +85,7 @@ const handleRegister=async()=>{
                     </Box>
 
                     <Stack spacing={6}>
-                    <Text textAlign={'left'}>Already Registered ? <Link to='/register'><span style={{color:'Blue'}}>Login here</span> </Link></Text>
+                    <Text textAlign={'left'}>Already Registered ? <Link to='/login'><span style={{color:'Blue'}}>Login here</span> </Link></Text>
                         <Button onClick={handleRegister} color={'white'} bg={'blue'} _hover={{backgroundColor:"blue"}} variant={'solid'}>
                             Register
                         </Button>

@@ -52,10 +52,10 @@ export const Slider = () => {
                 {
                     slide.map((el,i)=>{
                       return <>
-                       <Box boxShadow={' rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;'}  h='12px' w='20px' borderRadius={'md'}  onClick={()=>setcount(i)} 
+                       <Box boxShadow={' rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;'}  h='10px' w='10px' borderRadius={'md'}  onClick={()=>setcount(i)} 
                       bg={i==count?"blue":"white"}
                     
-                        // {i===count ? "grayscale(0%)":"grayscale(200%)"}
+                       
                          >
                             
                         </Box>
