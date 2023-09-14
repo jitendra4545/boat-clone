@@ -1,5 +1,9 @@
-import { Box, Button, Center, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Flex, Image, Input, InputGroup, InputLeftElement, Menu, MenuButton, MenuItem, MenuList, Tab, TabIndicator, TabList, Tabs, Text, useDisclosure } from '@chakra-ui/react'
-import React from 'react'
+import {
+    Box, Button, Center, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Flex, Image, Input, InputGroup, InputLeftElement, Menu, MenuButton, MenuItem, MenuList, Popover, PopoverArrow, PopoverBody, PopoverCloseButton, PopoverContent, PopoverFooter, PopoverHeader, PopoverTrigger, Portal, Tab, TabIndicator, TabList, Tabs, Text, useDisclosure
+    ,
+    Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon
+} from '@chakra-ui/react'
+import React, { useState } from 'react'
 import { ChevronDownIcon, HamburgerIcon, Search2Icon } from '@chakra-ui/icons'
 import { CgProfile } from 'react-icons/cg'
 import { BsCart4 } from 'react-icons/bs'
@@ -7,25 +11,27 @@ import { useMediaQuery } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
 
 
-const navItems = [{
-    name: "Products",
-    link: "/product"
-},
-{
-    name: "Daily Deals",
-    link: ""
-}, {
+const navItems = [
 
-    name: "Gift With Boat",
-    link: ""
+    {
+        name: "Products",
+        link: "/product"
+    },
+    {
+        name: "Daily Deals",
+        link: ""
+    }, {
 
-}, {
-    name: "Bulk Orders",
-    link: ""
-}, {
-    name: "More",
-    link: ""
-}]
+        name: "Gift With Boat",
+        link: ""
+
+    }, {
+        name: "Bulk Orders",
+        link: ""
+    }, {
+        name: "More",
+        link: ""
+    }]
 
 
 
@@ -35,20 +41,21 @@ export const Navbar = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef = React.useRef()
     const [isLargerThan800] = useMediaQuery('(min-width: 1100px)')
+    const [Data, setData] = useState(false)
 
     console.log(isLargerThan800)
 
 
 
     return (
-        <Box  position="sticky" top='0' boxShadow={'lg'}>
+        <Box position="sticky" zIndex={'1000'} bg={'#EDF4F5'} top='0' boxShadow={'lg'}>
 
 
             {
                 isLargerThan800 ? <Flex    >
 
                     <Center w='20%'>
-                        <Image w='30%' src='https://www.boat-lifestyle.com/cdn/shop/files/boAt_logo_small_3067da8c-a83b-46dd-b28b-6ef1e16ccd17_small.svg?v=1693549434' />
+                        <Link to='/'>  <Image w='70%' src='https://www.boat-lifestyle.com/cdn/shop/files/boAt_logo_small_3067da8c-a83b-46dd-b28b-6ef1e16ccd17_small.svg?v=1693549434' /></Link>
                     </Center>
                     <Box
                         flex='1'
@@ -61,7 +68,7 @@ export const Navbar = () => {
                                 <TabList >
                                     {
                                         navItems.map((el) => {
-                                            return <Link to={el.link}><Tab _hover={{fontWeight:'bold'}} fontSize={'15px'}>{el.name}</Tab></Link>
+                                            return <Link to={el.link}><Tab _hover={{ fontWeight: 'bold' }} fontSize={'15px'}>{el.name}</Tab></Link>
                                         })
                                     }
 
@@ -83,23 +90,70 @@ export const Navbar = () => {
                                 <Input border={'2px solid green'} type='text' placeholder='Search Any Product' />
                             </InputGroup>
                         </Box>
+
+
+
+                        {/* <Button>Trigger</Button> */}
+
+
+
+
+
+
+
                         <Box display={'flex'} gap='6' justifyContent={'center'} alignItems={'center'}>
-                            <Box >
-                                <Box display={'flex'} justifyContent={'center'} alignItems={'center'} >
-                                    <CgProfile fontSize={'25px'} />
-                                </Box>
-                                <Box>
-                                    <Text>Profile</Text>
-                                </Box>
-                            </Box>
-                            <Box >
+                            <Popover>
+                                <PopoverTrigger>
+                                    <Box >
+                                        <Box display={'flex'} justifyContent={'center'} alignItems={'center'} >
+                                            <CgProfile fontSize={'25px'} />
+                                        </Box>
+                                        <Box>
+                                            <Text>Profile</Text>
+                                        </Box>
+                                    </Box>
+
+                                </PopoverTrigger>
+                                <Portal>
+
+                                    {
+                                        Data ? <PopoverContent>
+
+                                            <PopoverArrow />
+                                            <PopoverHeader color={'red'} fontWeight={'bold'}>Hi User !</PopoverHeader>
+                                            <PopoverCloseButton />
+                                            <PopoverBody>
+                                                <Text>Manage Your Order</Text>
+                                                <Text mt='15px'>Account</Text>
+                                                <Button mt='15px' w='100%' color='white' _hover={{ backgroundColor: "red" }} bg='red'>Logout</Button>
+                                            </PopoverBody>
+                                            {/* <PopoverFooter>This is the footer</PopoverFooter> */}
+                                        </PopoverContent>
+                                            :
+                                            <PopoverContent>
+
+                                                <PopoverArrow />
+                                                <PopoverHeader color={'red'} >Hi boAthead!</PopoverHeader>
+                                                <PopoverCloseButton color={'red'} />
+                                                <PopoverBody textAlign={'center'}>
+                                                    <Link to='/login'> <Button w='100%' onClick={onClose} color='white' _hover={{ backgroundColor: "red" }} bg='red'>Login</Button></Link>
+
+                                                </PopoverBody>
+                                                {/* <PopoverFooter>This is the footer</PopoverFooter> */}
+                                            </PopoverContent>
+                                    }
+
+                                </Portal>
+                            </Popover>
+
+                            <Link to='/cart'>   <Box >
                                 <Box display={'flex'} justifyContent={'center'} alignItems={'center'} >
                                     <BsCart4 fontSize={'25px'} />
                                 </Box>
                                 <Box>
                                     <Text>Cart</Text>
                                 </Box>
-                            </Box>
+                            </Box></Link>
                         </Box>
                     </Box>
                 </Flex>
@@ -107,9 +161,9 @@ export const Navbar = () => {
                     :
 
                     <Box display={'flex'} justifyContent={'space-between'} p='15px 35px' >
-                        <Box>
+                        <Link to='/'> <Box>
                             <Image w='50%' src='https://www.boat-lifestyle.com/cdn/shop/files/boAt_logo_small_3067da8c-a83b-46dd-b28b-6ef1e16ccd17_small.svg?v=1693549434' />
-                        </Box>
+                        </Box></Link>
                         <Box>
                             <InputGroup>
                                 <InputLeftElement pointerEvents='none'>
@@ -137,17 +191,64 @@ export const Navbar = () => {
                 <DrawerContent>
                     <DrawerCloseButton />
                     {/* <DrawerHeader>Create your account</DrawerHeader> */}
+                    <DrawerHeader mt='30px' >
+                        <Box display={'grid'} p={'15px'} gap='20' gridTemplateColumns={"repeat(2,1fr)"} >
 
-                    <DrawerBody mt={'150px'} mb='150px' display={'grid'}   >
+
+                            <Accordion allowToggle>
+                                <AccordionItem>
+                                    <AccordionButton h='70px' w='60px'>
+
+                                        <Box borderRadius={'15px'} bg={'red'} color={'white'} p='10px' >
+                                            <Box display={'flex'} justifyContent={'center'} alignItems={'center'} >
+                                                <CgProfile fontSize={'25px'} />
+                                            </Box>
+                                            <Box display={'flex'} justifyContent={'center'} alignItems={'center'}>
+                                                <Text>Profile</Text>
+                                            </Box>
+                                        </Box>
+
+                                    </AccordionButton>
+                                    {
+                                        Data ? <AccordionPanel pb={4}>
+                                            <Text fontWeight={'bold'} color={'red'}>Hi User !</Text>
+                                            <Text fontSize={'15px'}>Manage Your Order</Text>
+                                            <Text fontSize={'15px'} mt='15px'>Account</Text>
+                                            <Button mt='15px' w='100%' color='white' _hover={{ backgroundColor: "red" }} bg='red'>Logout</Button>
+                                        </AccordionPanel>
+                                            :
+                                            <AccordionPanel pb={4}>
+                                                <Text color={'red'} fontSize={'15px'}>Hi boAthead!</Text>
+                                                <Link to='/login'> <Button onClick={onClose} mt='15px' w='100%' color='white' _hover={{ backgroundColor: "red" }} bg='red'>Login</Button></Link>
+                                            </AccordionPanel>
+                                    }
+
+                                </AccordionItem>
+                            </Accordion>
+
+
+                            <Link to='/cart'>   <Box onClick={onClose} bg={'red'} h='70px' w='60px' color={'white'} borderRadius={'15px'} p='10px' >
+                                <Box display={'flex'} justifyContent={'center'} alignItems={'center'} >
+                                    <BsCart4 fontSize={'25px'} />
+                                </Box>
+                                <Box display={'flex'} justifyContent={'center'} alignItems={'center'} >
+                                    <Text fontWeight={'normal'}>Cart</Text>
+                                </Box>
+                            </Box>
+                            </Link>
+                        </Box>
+                    </DrawerHeader>
+                    <DrawerBody mt={'80px'} display={'grid'}   >
 
                         {
-                            navItems.map((el) => {
-                                return <Menu >
-                                    <MenuButton as={Button} >
+                            navItems.map((el,i) => {
+                                return <Menu key={i} >
+                                    <Link to={el.link}> <MenuButton onClick={onClose} w='100%' color='red' bg={'white'} _hover={{ backgroundColor: "red", color: 'white' }} border={'2px dashed red'} as={Button} >
                                         {el.name}
                                     </MenuButton>
-
+                                    </Link>
                                 </Menu>
+
                             })
                         }
 
@@ -155,7 +256,7 @@ export const Navbar = () => {
                     </DrawerBody>
 
                     <DrawerFooter>
-               
+
                     </DrawerFooter>
                 </DrawerContent>
             </Drawer>
