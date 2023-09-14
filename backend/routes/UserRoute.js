@@ -18,18 +18,19 @@ UserRouter.get("/", (req, res) => {
 UserRouter.post("/register", async (req, res) => {
     let data = req.body
     console.log(data)
-    let { password } = data
+    
     try {
 
         bcrypt.hash(data.password, 8, async function (err, hash) {
-            if (err) {
-                res.send({ "msg": "somthing went wrong! Unable to hash password", "error": err.message })
-            } else {
+            if (hash) {
                 let newData = new UserModel({ ...data, password: hash })
                 console.log(newData)
                 await newData.save()
                 res.send({ "msg": "You have been registered successfully" })
 
+               
+            } else {
+                res.send({ "msg": "somthing went wrong! Unable to hash password", "error": err.message })
             }
         });
     } catch (err) {
