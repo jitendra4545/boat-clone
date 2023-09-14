@@ -20,19 +20,29 @@ UserRouter.post("/register", async (req, res) => {
     console.log(data)
     
     try {
+      let single=  await UserModel.findOne({email:data.email})
+      
+       
+        if(single){
+            res.send({ "msg": "Email Already Registered ! Enter a new email", "error": err.message })
+        }else{
+            bcrypt.hash(data.password, 8, async function (err, hash) {
+                if (hash) {
+                    let newData = new UserModel({ ...data, password: hash })
+                    console.log(newData)
+                    await newData.save()
+                    res.send({ "msg": "You have been registered successfully" })
+    
+                   
+                } else {
+                    res.send({ "msg": "somthing went wrong! Unable to hash password", "error": err.message })
+                }
+            });
+        }
 
-        bcrypt.hash(data.password, 8, async function (err, hash) {
-            if (hash) {
-                let newData = new UserModel({ ...data, password: hash })
-                console.log(newData)
-                await newData.save()
-                res.send({ "msg": "You have been registered successfully" })
+       
 
-               
-            } else {
-                res.send({ "msg": "somthing went wrong! Unable to hash password", "error": err.message })
-            }
-        });
+
     } catch (err) {
         res.send({ "msg": "somthing went wrong! cannot register", "error": err.message })
     }
@@ -53,11 +63,11 @@ UserRouter.post("/login", async (req, res) => {
                     await UserModel.findByIdAndUpdate({ _id: SingleData._id }, { isActive: true })
                     res.send({ "msg": "Login Successfull", "token": token })
                 } else {
-                    res.send("unable to generate token")
+                    res.send({"msg":"unable to generate token"})
                 }
             });
         } else {
-            res.send("Unable to find Data Register first")
+            res.send({"msg":"Unable to find Data Register first"})
         }
     } catch (err) {
         res.send({ "msg": "somthing went wrong! cannot login", "error": err.message })
@@ -73,7 +83,7 @@ UserRouter.post("/login", async (req, res) => {
 UserRouter.get("/alluser",async(req,res)=>{
 
     try{
-let allUser=UserModel.find()
+let allUser=await UserModel.find()
 res.send(allUser)
     }catch(err){
         res.send({ "msg": "somthing went wrong! cannot get data", "error": err.message })
