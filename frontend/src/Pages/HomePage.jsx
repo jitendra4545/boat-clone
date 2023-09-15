@@ -4,11 +4,13 @@ import { Slider2 } from '../components/Homepage/Slider2'
 import { Box, Text } from '@chakra-ui/react'
 import { Slider4 } from '../components/Homepage/Slider4'
 import { Slider3 } from '../components/Homepage/Slider3'
+import { Navbar } from '../components/Navbar'
 // import { Slider1 } from '../components/Homepage/Slider1'
 
 export const HomePage = () => {
   return (
     <Box>
+      <Navbar/>
         <Slider/>
         {/* Shop by Lifestyle    */}
         <Box textAlign={'left'}>
