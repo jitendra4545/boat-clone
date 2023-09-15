@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { GetData } from '../redux/AppReducer/action'
 import { ProductNav } from '../components/ProductPage/ProductNav'
 import { ProductCard } from '../components/ProductPage/ProductCard'
+import { Footer } from './Footer'
 
 export const ProductPage = () => {
 
@@ -29,13 +30,13 @@ export const ProductPage = () => {
         <Navbar />
       </Box>
 
-      <Box w={{base:"98%",md:"95%",lg:"90%"}} m='auto'>
+      <Box  w={{base:"98%",md:"95%",lg:"90%"}} m='auto'>
 
         <Box>
           <ProductNav />
         </Box>
 
-        <Box mt={'20px'} display={'grid'} gap='4' gridTemplateColumns={{base:"repeat(1,1fr)",md:"repeat(2,1fr)",lg:"repeat(3,1fr)"}}>
+        <Box mt={'20px'} display={'grid'} gap='4'  gridTemplateColumns={{base:"repeat(1,1fr)",md:"repeat(2,1fr)",lg:"repeat(3,1fr)"}}>
           {
             product?.map((el,i) => {
               return  <ProductCard {...el} />
@@ -50,7 +51,7 @@ export const ProductPage = () => {
 
       </Box>
 
-
+<Footer/>
 
     </Box>
   )

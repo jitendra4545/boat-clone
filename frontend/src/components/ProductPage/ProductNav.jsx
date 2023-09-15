@@ -21,7 +21,7 @@ export const ProductNav = () => {
                 <Box>
 
                     <Menu>
-                        <MenuButton as={Button} leftIcon={<CiFilter />} rightIcon={<ChevronDownIcon />} fontWeight={'bold'} >
+                        <MenuButton border={'1px solid black'} as={Button} leftIcon={<CiFilter />} rightIcon={<ChevronDownIcon />} fontWeight={'bold'} >
                             Filter :
                         </MenuButton>
                         <MenuList p='20px' fontSize={'18px'}>
@@ -40,7 +40,7 @@ export const ProductNav = () => {
                 <Box>
 
                     <Menu>
-                        <MenuButton as={Button} leftIcon={<TbArrowsSort />} rightIcon={<ChevronDownIcon />} fontWeight={'bold'} >
+                        <MenuButton border={'1px solid black'} as={Button} leftIcon={<TbArrowsSort />} rightIcon={<ChevronDownIcon />} fontWeight={'bold'} >
                             Sort :
                         </MenuButton>
                         <MenuList p='20px' fontSize={'18px'} >

@@ -5,6 +5,7 @@ import { Box, Text } from '@chakra-ui/react'
 import { Slider4 } from '../components/Homepage/Slider4'
 import { Slider3 } from '../components/Homepage/Slider3'
 import { Navbar } from '../components/Navbar'
+import { Footer } from './Footer'
 // import { Slider1 } from '../components/Homepage/Slider1'
 
 export const HomePage = () => {
@@ -22,7 +23,7 @@ export const HomePage = () => {
         <Slider4/>
         </Box>
         
-        
+       <Footer/> 
     </Box>
   )
 }

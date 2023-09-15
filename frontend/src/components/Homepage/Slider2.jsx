@@ -124,7 +124,7 @@ export const Slider2 = () => {
       {
         category.map((el, i) => {
 
-          return <Box boxShadow={'rgba(0, 0, 0, 0.24) 0px 3px 8px'} p='10px 10px' >
+          return <Box bg={'white'} borderRadius={'10px 10px 0px 0px'} boxShadow={'rgba(0, 0, 0, 0.24) 0px 3px 8px'} p='10px 10px' >
             <Image w='100%'  src={el.image} />
             <Text fontWeight={'semibold'} textAlign={'center'}>{el.name}</Text>
           </Box>

@@ -1,7 +1,13 @@
+import { Box } from '@chakra-ui/react'
 import React from 'react'
+import { Navbar } from '../components/Navbar'
 
 export const CartPage = () => {
   return (
-    <div>CartPage</div>
+    <Box>
+      <Navbar/>
+      CartPage
+      
+      </Box>
   )
 }

@@ -108,7 +108,6 @@ window.location.reload()
 
 
 
-                        {/* <Button>Trigger</Button> */}
 
 
 
@@ -231,7 +230,7 @@ window.location.reload()
                                             <Text fontWeight={'bold'} color={'red'}>Hi User !</Text>
                                             <Text fontSize={'15px'}>Manage Your Order</Text>
                                             <Text fontSize={'15px'} mt='15px'>Account</Text>
-                                            <Button mt='15px' w='100%' color='white' _hover={{ backgroundColor: "red" }} bg='red'>Logout</Button>
+                                            <Button onClick={handleLogout} mt='15px' w='100%' color='white' _hover={{ backgroundColor: "red" }} bg='red'>Logout</Button>
                                         </AccordionPanel>
                                             :
                                             <AccordionPanel pb={4}>
