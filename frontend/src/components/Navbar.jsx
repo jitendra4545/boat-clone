@@ -42,26 +42,26 @@ export const Navbar = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef = React.useRef()
     const [isLargerThan800] = useMediaQuery('(min-width: 1100px)')
-    
-
-//     const token=useSelector((store)=>store.AuthReducer.token)
-//   console.log(token)
-
-const handleLogout=()=>{
-    localStorage.removeItem("token")
-window.location.reload()
-
-}
-  let token=JSON.parse(localStorage.getItem("token"))
 
 
+    //     const token=useSelector((store)=>store.AuthReducer.token)
+    //   console.log(token)
+
+    const handleLogout = () => {
+        localStorage.removeItem("token")
+        window.location.reload()
+
+    }
+    let token = JSON.parse(localStorage.getItem("token"))
 
 
 
 
 
 
- console.log(token)
+
+
+    console.log(token)
     return (
         <Box position="sticky" zIndex={'1000'} bg={'white'} top='0' boxShadow={'lg'}>
 
@@ -139,9 +139,9 @@ window.location.reload()
                                             <PopoverBody>
                                                 <Text>Manage Your Order</Text>
                                                 <Text mt='15px'>Account</Text>
-                                                <Button 
-                                                onClick={handleLogout} 
-                                                mt='15px' w='100%' color='white' _hover={{ backgroundColor: "red" }} bg='red'>Logout</Button>
+                                                <Button
+                                                    onClick={handleLogout}
+                                                    mt='15px' w='100%' color='white' _hover={{ backgroundColor: "red" }} bg='red'>Logout</Button>
                                             </PopoverBody>
                                             {/* <PopoverFooter>This is the footer</PopoverFooter> */}
                                         </PopoverContent>
@@ -152,7 +152,7 @@ window.location.reload()
                                                 <PopoverHeader color={'red'} >Hi boAthead!</PopoverHeader>
                                                 <PopoverCloseButton color={'red'} />
                                                 <PopoverBody textAlign={'center'}>
-                                                    <Link to='/login'> <Button w='100%'   color='white' _hover={{ backgroundColor: "red" }} bg='red'>Login</Button></Link>
+                                                    <Link to='/login'> <Button w='100%' color='white' _hover={{ backgroundColor: "red" }} bg='red'>Login</Button></Link>
 
                                                 </PopoverBody>
                                                 {/* <PopoverFooter>This is the footer</PopoverFooter> */}
@@ -235,7 +235,7 @@ window.location.reload()
                                             :
                                             <AccordionPanel pb={4}>
                                                 <Text color={'red'} fontSize={'15px'}>Hi boAthead!</Text>
-                                                <Link to='/login'> <Button  mt='15px' w='100%' color='white' _hover={{ backgroundColor: "red" }} bg='red'>Login</Button></Link>
+                                                <Link to='/login'> <Button mt='15px' w='100%' color='white' _hover={{ backgroundColor: "red" }} bg='red'>Login</Button></Link>
                                             </AccordionPanel>
                                     }
 
@@ -257,7 +257,7 @@ window.location.reload()
                     <DrawerBody mt={'80px'} display={'grid'}   >
 
                         {
-                            navItems.map((el,i) => {
+                            navItems.map((el, i) => {
                                 return <Menu key={i} >
                                     <Link to={el.link}> <MenuButton onClick={onClose} w='100%' color='red' bg={'white'} _hover={{ backgroundColor: "red", color: 'white' }} border={'2px dashed red'} as={Button} >
                                         {el.name}
