@@ -6,8 +6,8 @@ import React from 'react'
 
 export const Footer = () => {
     return (
-        <Box mt={'50px'}>
-            <Box pb='70px' bg='white'  pt={'30px'} display={'grid'} gap='6' gridTemplateColumns={{base:"repeat(1,1fr)",md:"repeat(2,1fr)",lg:"repeat(3,1fr)"}}  >
+        <Box  bg={'#eff4f7'} mt={'50px'}>
+            <Box pb='70px'   pt={'30px'} display={'grid'} gap='6' gridTemplateColumns={{base:"repeat(1,1fr)",md:"repeat(2,1fr)",lg:"repeat(3,1fr)"}}  >
                 <Box display={'flex'} textAlign={'center'} alignItems={'center'} justifyContent={'center'} >
                     <Box>
                         <Image mb='15px' src='https://www.boat-lifestyle.com/cdn/shop/files/boAt_logo_small_3067da8c-a83b-46dd-b28b-6ef1e16ccd17_small.svg?v=1693549434' />

@@ -6,7 +6,7 @@ import { Box } from '@chakra-ui/react';
 
 function App() {
   return (
-    <Box bg={'#eff4f7'}>
+    <Box>
      
      <AllRoutes/>
     </Box>

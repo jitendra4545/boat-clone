@@ -28,7 +28,7 @@ const ProductGetPending = () => {
 
 export const GetData=()=>(dispatch)=>{
     dispatch(ProductGetPending())
-    axios.get("http://localhost:3200/product")
+    axios.get("http://localhost:3200/product/new")
     .then((res)=>{
         console.log(res)
         dispatch(ProductGetSuccees(res.data))
