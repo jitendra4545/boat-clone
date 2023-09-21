@@ -1,11 +1,12 @@
 
 const mongoose=require(`mongoose`)
+const { NewProductModel } = require("./LatestProducts")
 
 
 const CartSchema=mongoose.Schema({
     UserId:{type:String,required:true},
     qty:{type:Number,required:true},
-    productID:{type:mongoose.Schema.Types.ObjectId,ref:"product"}
+    productID:{type:mongoose.Schema.Types.ObjectId,ref:NewProductModel}
 
 },{
     versionKey:false,
@@ -13,7 +14,7 @@ const CartSchema=mongoose.Schema({
 })
 
 
-const CartModel=mongoose.model("cart",CartSchema)
+const CartModel=mongoose.model("boatcart",CartSchema)
 
 
 module.exports={

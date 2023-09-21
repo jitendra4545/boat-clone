@@ -4,6 +4,7 @@ const { connection } = require('./config/db')
 const { UserRouter } = require('./routes/UserRoute')
 const { ProductModel } = require('./model/ProductModel')
 const { ProductRouter } = require('./routes/ProductRoute')
+const { NewProductModel } = require('./model/LatestProducts')
 const app = express()
 app.use(express.json())
 require('dotenv').config()
@@ -21,15 +22,19 @@ app.get('/', (req, res) => {
 
 app.post('/addmore', async (req, res) => {
 let data=req.body
-    console.log(data)
+    console.log(data) 
     try {
-       let allData=await ProductModel.insertMany(data)
+       let allData=await NewProductModel.insertMany(data)
        
        res.send(allData)
     } catch (err) {
 res.send(err)
     }
 })
+
+
+
+
 
 app.listen(process.env.port, async () => {
     try {

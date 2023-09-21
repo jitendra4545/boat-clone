@@ -4,7 +4,7 @@ const jwt=require('jsonwebtoken')
 
 const Authorization=(req,res,next)=>{
     const token= req.headers.authorization;
-console.log(token)
+console.log("dsdssddsds",token)
     if(token){
         jwt.verify(token, 'BOAT', function(err, decoded) {
             if(decoded){

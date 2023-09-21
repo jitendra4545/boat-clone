@@ -5,16 +5,26 @@ const express = require('express')
 const { ProductModel } = require('../model/ProductModel')
 const { Authorization } = require('../middleware/auth')
 const { CartModel } = require('../model/CartModel')
+const { NewProductModel } = require('../model/LatestProducts')
 
 const ProductRouter = express.Router()
 
-// <----  THE CODE HEPLS TO REGISTER A NEW USER ---->
-
-
+// <----  THE CODE HEPLS TO GET ALL PRODUCTS ---->
 
 ProductRouter.get("/", async (req, res) => {
     try {
-        let allData = await ProductModel.find()
+        let allData = await NewProductModel.find()
+        res.send(allData)
+    } catch (err) {
+        res.send({ "msg": "somthing went wrong! cannot get the data", "error": err.message })
+    }
+})
+
+// <----  THE CODE HEPLS TO GET A SPECIFIC PRODUCT ---->
+ProductRouter.get("/:id", async (req, res) => {
+    let id=req.params.id
+    try {
+        let allData = await NewProductModel.find({_id:id})
         res.send(allData)
     } catch (err) {
         res.send({ "msg": "somthing went wrong! cannot get the data", "error": err.message })
