@@ -4,8 +4,8 @@ const { NewProductModel } = require("./LatestProducts")
 
 
 const CartSchema=mongoose.Schema({
-    UserId:{type:String,required:true},
-    qty:{type:Number,required:true},
+    UserId:{type:String},
+    qty:{type:Number},
     productID:{type:mongoose.Schema.Types.ObjectId,ref:NewProductModel}
 
 },{

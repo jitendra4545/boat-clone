@@ -53,19 +53,19 @@ ProductRouter.post(`/add_cart/:id`, Authorization, async (req, res) => {
 })
 
 
-// <----  THE CODE HEPLS TO GET ALL THE CART CART DATA ---->
+
+// ProductRouter.get("/cart",Authorization,async(req,res)=>{
+//     let id= req.body.UserId
+//     console.log(id)    
+//     try{
+//          let allData=await CartModel.find({UserId:id}).populate("productID")
+//          res.send(allData)
+//     }catch(err){
+// res.send(err)
+//     }
+// })
 
 
-ProductRouter.get('/cart', Authorization, async (req, res) => {
-    let UserId = req.body.UserId
-    console.log("user id", UserId)
-    try {
-        let cartData = await CartModel.find({ UserId }).populate("productID")
-        res.send(cartData)
-    } catch (err) {
-        res.send({ "msg": "somthing went wrong! cannot get the data", "error": err.message })
-    }
-})
 
 // <----  THE CODE HEPLS TO UPDATE ALL THE CART CART DATA ---->
 
