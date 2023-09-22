@@ -36,7 +36,7 @@ export const ProductPage = () => {
           <ProductNav />
         </Box>
 
-        <Box mt={'20px'} display={'grid'} gap='4'  gridTemplateColumns={{base:"repeat(1,1fr)",md:"repeat(2,1fr)",lg:"repeat(3,1fr)"}}>
+        <Box mt={'30px'} display={'grid'} gap='4'  gridTemplateColumns={{base:"repeat(1,1fr)",md:"repeat(2,1fr)",lg:"repeat(3,1fr)"}}>
           {
             product?.map((el,i) => {
               return <>

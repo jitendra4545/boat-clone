@@ -55,13 +55,6 @@ export const Navbar = () => {
     let token = JSON.parse(localStorage.getItem("token"))
 
 
-
-
-
-
-
-
-    console.log(token)
     return (
         <Box position="sticky" zIndex={'1000'} bg={'white'} top='0' boxShadow={'lg'}>
 

@@ -11,7 +11,7 @@ const initialState = {
 
 export const reducer = (state = initialState, action) => {
     const { type, payload } = action
-    console.log(payload)
+   
     switch (type) {
 
         case USER_REGISTER_SUCCESS: {
@@ -31,6 +31,7 @@ export const reducer = (state = initialState, action) => {
             }
         }
       case USER_LOGIN_SUCCESS:{
+       
         return {
             ...state,token:payload, isLoading: false, isError: false
         }
