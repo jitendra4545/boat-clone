@@ -108,7 +108,7 @@ export const SingleDataCard = ({ data }) => {
            
         </Box>
         <Box mt='30px'>
-        <ProductPageFooter />
+        <ProductPageFooter data={data[0]?.product_item_meta__title} />
         </Box>
         
         </Box>

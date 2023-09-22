@@ -7,7 +7,8 @@ const slide = [
     "https://www.boat-lifestyle.com/cdn/shop/files/IMG_0909_1440x.jpg?v=1693583898",
     "https://www.boat-lifestyle.com/cdn/shop/files/Wave_Sigma_WEB_ab42ec20-2ddd-4069-8299-9808e883b4f8_1440x.jpg?v=1693828299",
     "https://www.boat-lifestyle.com/cdn/shop/files/Lunar_ORB_WEB_1_1440x.jpg?v=1693547730",
-
+"https://www.boat-lifestyle.com/cdn/shop/files/Wave_Genesis_WEB_1440x.jpg?v=1695297762",
+"https://www.boat-lifestyle.com/cdn/shop/files/Airdopes_161_ANC_WEB_83e48930-77e7-48a1-853e-d4e5b84283d2_1440x.png?v=1694842790"
 ]
 
 

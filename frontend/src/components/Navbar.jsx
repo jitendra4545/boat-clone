@@ -10,6 +10,8 @@ import { BsCart4 } from 'react-icons/bs'
 import { useMediaQuery } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import { NavProfile } from './NavbarComponent/NavProfile'
+import { NavCart } from './NavbarComponent/NavCart'
 
 
 const navItems = [
@@ -47,11 +49,7 @@ export const Navbar = () => {
     //     const token=useSelector((store)=>store.AuthReducer.token)
     //   console.log(token)
 
-    const handleLogout = () => {
-        localStorage.removeItem("token")
-        window.location.reload()
-
-    }
+   
     let token = JSON.parse(localStorage.getItem("token"))
 
 
@@ -109,81 +107,29 @@ export const Navbar = () => {
 
 
                         <Box display={'flex'} gap='6' justifyContent={'center'} alignItems={'center'}>
-                            <Popover>
-                                <PopoverTrigger>
-                                    <Box >
-                                        <Box display={'flex'} justifyContent={'center'} alignItems={'center'} >
-                                            <CgProfile fontSize={'25px'} />
-                                        </Box>
-                                        <Box>
-                                            <Text>Profile</Text>
-                                        </Box>
-                                    </Box>
-
-                                </PopoverTrigger>
-                                <Portal>
-
-                                    {
-                                        token ? <PopoverContent>
-
-                                            <PopoverArrow />
-                                            <PopoverHeader color={'red'} fontWeight={'bold'}>Hi User !</PopoverHeader>
-                                            <PopoverCloseButton />
-                                            <PopoverBody>
-                                                <Text>Manage Your Order</Text>
-                                                <Text mt='15px'>Account</Text>
-                                                <Button
-                                                    onClick={handleLogout}
-                                                    mt='15px' w='100%' color='white' _hover={{ backgroundColor: "red" }} bg='red'>Logout</Button>
-                                            </PopoverBody>
-                                            {/* <PopoverFooter>This is the footer</PopoverFooter> */}
-                                        </PopoverContent>
-                                            :
-                                            <PopoverContent>
-
-                                                <PopoverArrow />
-                                                <PopoverHeader color={'red'} >Hi boAthead!</PopoverHeader>
-                                                <PopoverCloseButton color={'red'} />
-                                                <PopoverBody textAlign={'center'}>
-                                                    <Link to='/login'> <Button w='100%' color='white' _hover={{ backgroundColor: "red" }} bg='red'>Login</Button></Link>
-
-                                                </PopoverBody>
-                                                {/* <PopoverFooter>This is the footer</PopoverFooter> */}
-                                            </PopoverContent>
-                                    }
-
-                                </Portal>
-                            </Popover>
-
-                            <Link to='/cart'>   <Box >
-                                <Box display={'flex'} justifyContent={'center'} alignItems={'center'} >
-                                    <BsCart4 fontSize={'25px'} />
-                                </Box>
-                                <Box>
-                                    <Text>Cart</Text>
-                                </Box>
-                            </Box></Link>
+                            <NavProfile/>
+                           <NavCart/>
                         </Box>
                     </Box>
                 </Flex>
 
                     :
 
-                    <Box display={'flex'} justifyContent={'space-between'} p='15px 35px' >
-                        <Link to='/'> <Box>
-                            <Image w='50%' src='https://www.boat-lifestyle.com/cdn/shop/files/boAt_logo_small_3067da8c-a83b-46dd-b28b-6ef1e16ccd17_small.svg?v=1693549434' />
-                        </Box></Link>
-                        <Box>
-                            <InputGroup>
-                                <InputLeftElement pointerEvents='none'>
-                                    <Search2Icon color='gray.300' />
-                                </InputLeftElement>
-                                <Input mr='25px' border={'2px solid green'} type='text' placeholder='Search Any Product' />
-                            </InputGroup>
-                        </Box>
-                        <Box>
+                    <Box display={'flex'} justifyContent={'space-between'} p='15px 20px' >
+                        
+                        <Box display={'flex'}>
+                        <Box mr='15px'>
                             <HamburgerIcon ref={btnRef} colorScheme='teal' onClick={onOpen} fontSize={'20px'} />
                         </Box>
+                        <Link to='/'>  <Image w='50%' src='https://www.boat-lifestyle.com/cdn/shop/files/boAt_logo_small_3067da8c-a83b-46dd-b28b-6ef1e16ccd17_small.svg?v=1693549434' /></Link>
+                        </Box>
+                        <Box>
+                        <Box display={'flex'} gap='6' justifyContent={'center'} alignItems={'center'}>
+                           <NavProfile/>
+                            <NavCart/>
+                        </Box>
+                        </Box>
+                       
                     </Box>
 
 
@@ -192,7 +138,7 @@ export const Navbar = () => {
 
             <Drawer
                 isOpen={isOpen}
-                placement='right'
+                placement='left'
                 onClose={onClose}
                 finalFocusRef={btnRef}
             >
@@ -201,51 +147,7 @@ export const Navbar = () => {
                     <DrawerCloseButton />
                     {/* <DrawerHeader>Create your account</DrawerHeader> */}
                     <DrawerHeader mt='30px' >
-                        <Box display={'grid'} p={'15px'} gap='20' gridTemplateColumns={"repeat(2,1fr)"} >
-
-
-                            <Accordion allowToggle>
-                                <AccordionItem>
-                                    <AccordionButton h='70px' w='60px'>
-
-                                        <Box borderRadius={'15px'} bg={'red'} color={'white'} p='10px' >
-                                            <Box display={'flex'} justifyContent={'center'} alignItems={'center'} >
-                                                <CgProfile fontSize={'25px'} />
-                                            </Box>
-                                            <Box display={'flex'} justifyContent={'center'} alignItems={'center'}>
-                                                <Text>Profile</Text>
-                                            </Box>
-                                        </Box>
-
-                                    </AccordionButton>
-                                    {
-                                        token ? <AccordionPanel pb={4}>
-                                            <Text fontWeight={'bold'} color={'red'}>Hi User !</Text>
-                                            <Text fontSize={'15px'}>Manage Your Order</Text>
-                                            <Text fontSize={'15px'} mt='15px'>Account</Text>
-                                            <Button onClick={handleLogout} mt='15px' w='100%' color='white' _hover={{ backgroundColor: "red" }} bg='red'>Logout</Button>
-                                        </AccordionPanel>
-                                            :
-                                            <AccordionPanel pb={4}>
-                                                <Text color={'red'} fontSize={'15px'}>Hi boAthead!</Text>
-                                                <Link to='/login'> <Button mt='15px' w='100%' color='white' _hover={{ backgroundColor: "red" }} bg='red'>Login</Button></Link>
-                                            </AccordionPanel>
-                                    }
-
-                                </AccordionItem>
-                            </Accordion>
-
-
-                            <Link to='/cart'>   <Box onClick={onClose} bg={'red'} h='70px' w='60px' color={'white'} borderRadius={'15px'} p='10px' >
-                                <Box display={'flex'} justifyContent={'center'} alignItems={'center'} >
-                                    <BsCart4 fontSize={'25px'} />
-                                </Box>
-                                <Box display={'flex'} justifyContent={'center'} alignItems={'center'} >
-                                    <Text fontWeight={'normal'}>Cart</Text>
-                                </Box>
-                            </Box>
-                            </Link>
-                        </Box>
+                       
                     </DrawerHeader>
                     <DrawerBody mt={'80px'} display={'grid'}   >
 

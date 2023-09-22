@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { GetSingleData } from '../redux/AppReducer/action'
 import { SingleDataCard } from '../components/ProductPage/SingleDataCard'
+import { Footer } from './Footer'
 
 export const SingleProductPage = () => {
  const params=useParams()
@@ -25,6 +26,7 @@ console.log(isLoading,singleprod)
         singleprod&& <SingleDataCard data={singleprod} />
       }
  </Box>
+ <Footer/>
     </Box>
   )
 }
