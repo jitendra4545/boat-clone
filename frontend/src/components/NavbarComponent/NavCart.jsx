@@ -25,7 +25,7 @@ export const NavCart = () => {
                 <Box display={'flex'} justifyContent={'center'} alignItems={'center'} >
                 
                     <BsCart4 fontSize={'25px'} />
-                    <Box ml='-10px' mb='5px' p='2px' fontWeight={'bold'} color={'white'}  bg='red' fontSize={'9px'} borderRadius={'50%'} >{cart.length}</Box>
+                  {cart.length>0 &&   <Box ml='-10px' mb='5px' p='3px' fontWeight={'bold'} color={'white'}  bg='red' fontSize={'9px'} borderRadius={'50%'} >{cart.length}</Box>}
                 </Box>
                 <Box>
                     <Text>Cart</Text>

@@ -1,14 +1,16 @@
 import { Box, Button, Popover, PopoverArrow, PopoverBody, PopoverCloseButton, PopoverContent, PopoverHeader, PopoverTrigger, Portal, Text } from '@chakra-ui/react'
 import React from 'react'
 import { CgProfile } from 'react-icons/cg'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 export const NavProfile = () => {
 
+    const navigate=useNavigate()
     let token = JSON.parse(localStorage.getItem("token"))
     const handleLogout = () => {
         localStorage.removeItem("token")
         window.location.reload()
+ navigate("/")
 
     }
   return (

@@ -6,6 +6,7 @@ import { GetData } from '../../redux/AppReducer/action'
 import { ProductNav } from '../../components/ProductPage/ProductNav'
 import { ProductCard } from '../../components/ProductPage/ProductCard'
 import { Footer } from '../Footer'
+import { Loader } from '../../components/Loader'
 
 export const EarbudPage = () => {
 
@@ -34,13 +35,8 @@ export const EarbudPage = () => {
         </Box>
 
         {
-          isLoading ? <Box w='70vh' m='auto' display={'flex'} justifyContent={'center'} alignItems={'center'}>
-            <Box>
-
-            <Image src='https://cdn.pixabay.com/animation/2022/10/11/03/16/03-16-39-160_512.gif' />
-          </Box>
-          </Box>
-
+          isLoading ?
+<Loader/>
           :
           <Box mt={'30px'} display={'grid'} gap='4'  gridTemplateColumns={{base:"repeat(1,1fr)",md:"repeat(2,1fr)",lg:"repeat(3,1fr)"}}>
           {
