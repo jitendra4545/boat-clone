@@ -83,20 +83,7 @@ ProductRouter.patch("/cart/:id", Authorization, async (req, res) => {
     }
 })
 
-// <----  THE CODE HEPLS TO DELETE  THE CART CART DATA ---->
 
-
-ProductRouter.delete("/cart/:id", Authorization, async (req, res) => {
-    let ID = req.params.id
-    console.log(ID)
-    try {
-        await CartModel.findOneAndDelete({ _id: ID })
-        res.send({ "msg": "Product has been deleted" })
-    } catch (err) {
-        res.send({ "msg": "somthing went wrong! cannot delete", "error": err.message })
-    }
-
-})
 
 // <----  THE CODE HEPLS TO  EMPTY THE CART CART DATA ---->
 

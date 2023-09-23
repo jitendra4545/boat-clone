@@ -40,7 +40,7 @@ app.get('/cart', Authorization, async (req, res) => {
     let UserId = req.body.UserId
     console.log("user id", UserId)
     try {
-        let cartData = await CartModel.find().populate("productID")
+        let cartData = await CartModel.find({UserId:UserId}).populate("productID")
         res.send(cartData)
     } catch (err) {
         res.send({ "msg": "somthing went wrong! cannot get the data", "error": err.message })
@@ -49,6 +49,20 @@ app.get('/cart', Authorization, async (req, res) => {
 })
 
 
+// <----  THE CODE HEPLS TO DELETE  THE CART CART DATA ---->
+
+
+app.delete("/cart/:id", Authorization, async (req, res) => {
+    let ID = req.params.id
+    console.log(ID)
+    try {
+        await CartModel.findOneAndDelete({ _id: ID })
+        res.send({ "msg": "Product has been deleted" })
+    } catch (err) {
+        res.send({ "msg": "somthing went wrong! cannot delete", "error": err.message })
+    }
+
+})
 
 
 
