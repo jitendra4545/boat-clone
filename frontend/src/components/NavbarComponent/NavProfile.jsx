@@ -13,7 +13,7 @@ export const NavProfile = () => {
     }
   return (
     <Box>
-        <Popover>
+        <Popover trigger="hover" >
                                 <PopoverTrigger>
                                     <Box >
                                         <Box display={'flex'} justifyContent={'center'} alignItems={'center'} >

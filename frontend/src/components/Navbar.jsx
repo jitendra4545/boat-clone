@@ -16,10 +16,7 @@ import { NavCart } from './NavbarComponent/NavCart'
 
 const navItems = [
 
-    {
-        name: "Products",
-        link: "/product"
-    },
+   
     {
         name: "Daily Deals",
         link: ""
@@ -36,7 +33,28 @@ const navItems = [
         link: ""
     }]
 
-
+const product=[
+    {
+        img:"https://www.boat-lifestyle.com/cdn/shop/files/True-wireless-earbuds_small.png?v=1684842854",
+        link:"/earbud",
+        "txt":"True Wireless Earbuds"
+    },
+    {
+        img:"https://www.boat-lifestyle.com/cdn/shop/collections/smartwatches_100x.png?v=1684827668",
+        link:"/watch",
+        "txt":"Smart Watches"
+    },
+    {
+        img:"https://www.boat-lifestyle.com/cdn/shop/files/Wireless-Headphones_small.png?v=1684842854",
+        link:"/headphone",
+        "txt":"Wireless Headphones"
+    },
+    {
+        img:"https://www.boat-lifestyle.com/cdn/shop/files/Wireless-Speaker_small.png?v=1684842854",
+        link:"/speaker",
+        "txt":"Party Speakers"
+    }
+]
 
 
 
@@ -68,10 +86,35 @@ export const Navbar = () => {
                         p="3"
                         display={'flex'} justifyContent={'space-around'}
                     >
-
+                       
                         <Box>
                             <Tabs position="relative" variant="unstyled">
                                 <TabList >
+                                <Popover  trigger="hover" >
+  <PopoverTrigger>
+   
+        <Tab>Product</Tab>
+     
+  </PopoverTrigger>
+  <PopoverContent>
+    <PopoverArrow />
+    <PopoverCloseButton />
+    <PopoverHeader></PopoverHeader>
+    <PopoverBody>
+        <Box display={'grid'} gap='2' gridTemplateColumns={"repeat(2,1fr)"}>
+           {product.map((el,i)=>{
+            return  <Link to={el.link}> <Box display={'flex'} p='15px' borderRadius={'10px'} _hover={{bg:"green.100"}} justifyContent={'center'} alignItems={'center'}>
+                <Box>
+                <Image src={el.img} />
+                <Text textAlign={'center'}>{el.txt}</Text>
+                </Box>
+                </Box></Link>
+           })}
+        </Box>
+        
+        </PopoverBody>
+  </PopoverContent>
+</Popover>
                                     {
                                         navItems.map((el) => {
                                             return <Link to={el.link}><Tab _hover={{ fontWeight: 'bold' }} fontSize={'15px'}>{el.name}</Tab></Link>
@@ -120,6 +163,7 @@ export const Navbar = () => {
                         <Box display={'flex'}>
                         <Box mr='15px'>
                             <HamburgerIcon ref={btnRef} colorScheme='teal' onClick={onOpen} fontSize={'20px'} />
+
                         </Box>
                         <Link to='/'>  <Image w='50%' src='https://www.boat-lifestyle.com/cdn/shop/files/boAt_logo_small_3067da8c-a83b-46dd-b28b-6ef1e16ccd17_small.svg?v=1693549434' /></Link>
                         </Box>
@@ -149,20 +193,34 @@ export const Navbar = () => {
                     <DrawerHeader mt='30px' >
                        
                     </DrawerHeader>
-                    <DrawerBody mt={'80px'} display={'grid'}   >
+                    <DrawerBody mt={'50px'} display={'grid'}   >
 
-                        {
-                            navItems.map((el, i) => {
-                                return <Menu key={i} >
-                                    <Link to={el.link}> <MenuButton onClick={onClose} w='100%' color='red' bg={'white'} _hover={{ backgroundColor: "red", color: 'white' }} border={'2px dashed red'} as={Button} >
-                                        {el.name}
-                                    </MenuButton>
-                                    </Link>
-                                </Menu>
-
-                            })
-                        }
-
+                      <Popover  trigger="hover" >
+  <PopoverTrigger>
+   
+        <Button bg='red' _hover={{bg:"red"}} color={'white'} >Product</Button>
+     
+  </PopoverTrigger>
+  <PopoverContent>
+    <PopoverArrow />
+    <PopoverCloseButton />
+    <PopoverHeader></PopoverHeader>
+    <PopoverBody>
+        <Box display={'grid'} gap='2' gridTemplateColumns={"repeat(2,1fr)"}>
+           {product.map((el,i)=>{
+            return <Link to={el.link}> <Box display={'flex'} p='15px' borderRadius={'10px'} _hover={{bg:"green.100"}} justifyContent={'center'} alignItems={'center'}>
+            <Box>
+            <Image src={el.img} />
+            <Text textAlign={'center'}>{el.txt}</Text>
+            </Box>
+            </Box></Link>
+           })}
+        </Box>
+        
+        </PopoverBody>
+  </PopoverContent>
+</Popover>
+                
 
                     </DrawerBody>
 

@@ -1,13 +1,13 @@
 import { Box, Heading, Image, Stack, Text } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
-import { Navbar } from '../components/Navbar'
+import { Navbar } from '../../components/Navbar'
 import { useDispatch, useSelector } from 'react-redux'
-import { GetData } from '../redux/AppReducer/action'
-import { ProductNav } from '../components/ProductPage/ProductNav'
-import { ProductCard } from '../components/ProductPage/WatchCard'
-import { Footer } from './Footer'
+import { GetData } from '../../redux/AppReducer/action'
+import { ProductNav } from '../../components/ProductPage/ProductNav'
+import { ProductCard } from '../../components/ProductPage/ProductCard'
+import { Footer } from '../Footer'
 
-export const ProductPage = () => {
+export const WatchPage = () => {
 
   const dispatch = useDispatch()
   const { product, isLoading, isError } = useSelector((store) => store.AppReducer)
@@ -20,10 +20,7 @@ export const ProductPage = () => {
 
 
   console.log(product)
-  // if(isLoading){
-  //   return <Heading>Loading.......</Heading>
-  // }
-
+  
   return (
     <Box>
       <Box>
@@ -36,7 +33,16 @@ export const ProductPage = () => {
           <ProductNav />
         </Box>
 
-        <Box mt={'30px'} display={'grid'} gap='4'  gridTemplateColumns={{base:"repeat(1,1fr)",md:"repeat(2,1fr)",lg:"repeat(3,1fr)"}}>
+        {
+          isLoading ? <Box w='70vh' m='auto' display={'flex'} justifyContent={'center'} alignItems={'center'}>
+            <Box>
+
+            <Image src='https://cdn.pixabay.com/animation/2022/10/11/03/16/03-16-39-160_512.gif' />
+          </Box>
+          </Box>
+
+          :
+          <Box mt={'30px'} display={'grid'} gap='4'  gridTemplateColumns={{base:"repeat(1,1fr)",md:"repeat(2,1fr)",lg:"repeat(3,1fr)"}}>
           {
             product?.map((el,i) => {
               return <>
@@ -50,6 +56,8 @@ export const ProductPage = () => {
           }
 
         </Box>
+
+        }
       </Box>
 
 <Footer/>

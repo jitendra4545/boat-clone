@@ -1,49 +1,65 @@
 import { Box, Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Input, Text, useDisclosure } from '@chakra-ui/react'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { BsCart4 } from 'react-icons/bs'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { GetCart } from '../../redux/CartReducer/action'
 
 export const NavCart = () => {
-    const { isOpen, onOpen, onClose } = useDisclosure()
-    const btnRef = React.useRef()
-  return (
-    <Box >
-         {/* <Link to='/cart'>   */}
-         <Box  onClick={onOpen}>
-                                <Box display={'flex'} justifyContent={'center'} alignItems={'center'} >
-                                    <BsCart4 fontSize={'25px'} />
-                                </Box>
-                                <Box>
-                                    <Text>Cart</Text>
-                                </Box>
-                            </Box>
-                             {/* </Link> */}
+    // const { isOpen, onOpen, onClose } = useDisclosure()
+    // const btnRef = React.useRef()
+
+    const dispatch = useDispatch()
+    const cart = useSelector((store) => store.CartReducer.cart)
+
+    console.log("Update,reducer", cart)
+    useEffect(() => {
+        dispatch(GetCart())
+    }, [])
+
+    return (
+        <Box >
+            <Link to='/cart'>  
+            <Box >
+            
+                <Box display={'flex'} justifyContent={'center'} alignItems={'center'} >
+                
+                    <BsCart4 fontSize={'25px'} />
+                    <Box ml='-10px' mb='5px' p='2px' fontWeight={'bold'} color={'white'}  bg='red' fontSize={'9px'} borderRadius={'50%'} >{cart.length}</Box>
+                </Box>
+                <Box>
+                    <Text>Cart</Text>
+                </Box>
+            </Box>
+            </Link>
 
 
-                             <Drawer
-        isOpen={isOpen}
-        placement='right'
-        onClose={onClose}
-        finalFocusRef={btnRef}
-      >
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerHeader>Create your account</DrawerHeader>
+            {/* <Drawer
+                isOpen={isOpen}
+                placement='right'
+                onClose={onClose}
+                finalFocusRef={btnRef}
+            >
+                <DrawerOverlay />
+                <DrawerContent>
+                    <DrawerCloseButton />
+                    <DrawerHeader position={'sticky'} top="0" >Your Cart</DrawerHeader>
 
-          <DrawerBody>
-            <Input placeholder='Type here...' />
-          </DrawerBody>
+                    <DrawerBody>
+                        <Box>
 
-          <DrawerFooter>
-            <Button variant='outline' mr={3} onClick={onClose}>
-              Cancel
-            </Button>
-            <Button colorScheme='blue'>Save</Button>
-          </DrawerFooter>
-        </DrawerContent>
-      </Drawer>
+                        </Box>
+                    </DrawerBody>
 
-    </Box>
-  )
+                    <DrawerFooter>
+                        <Button variant='outline' mr={3} onClick={onClose}>
+                            Cancel
+                        </Button>
+                        <Button colorScheme='blue'>Save</Button>
+                    </DrawerFooter>
+                </DrawerContent>
+            </Drawer> */}
+
+        </Box>
+    )
 }

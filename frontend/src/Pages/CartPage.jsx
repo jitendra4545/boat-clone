@@ -7,8 +7,7 @@ import { GetCart } from '../redux/CartReducer/action'
 export const CartPage = () => {
   const dispatch=useDispatch()
   const cart=useSelector((store)=>store.CartReducer.cart)
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const btnRef = React.useRef()
+  
   console.log("Update,reducer",cart)
   useEffect(()=>{
  dispatch(GetCart())

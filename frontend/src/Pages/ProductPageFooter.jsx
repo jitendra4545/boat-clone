@@ -75,7 +75,7 @@ export const ProductPageFooter = ({ data }) => {
 
 
 
-            <Box mt='20px'  >
+            <Box   >
                 <Box w='100%' margin={'auto'} >
                     <Box display={'grid'} gridTemplateColumns={{ base: "repeat(1,1fr)", md: "repeat(2,1fr)", lg: "repeat(2,1fr)" }} >
                         <Box  display={'flex'} justifyContent={'center'} alignItems={'center'} w='100%'>
@@ -90,10 +90,10 @@ export const ProductPageFooter = ({ data }) => {
                         </Box>
 
                         <Box bg={'grey'} display={'flex'} justifyContent={'center'} alignItems={'center'} w='100%'>
-                            <Box p='40px 70px' color={'white'}>
+                            <Box p='20px 70px' color={'white'}>
                                 <Heading fontWeight={'semibold'}>Charge for 5 Minutes, groove for 75 Minutes</Heading>
                                 <Text >Let nothing come in between your grooving sessions or important calls. With just 5 Minutes of charging, enjoy 75 Minutes of uninterrupted performance. </Text>
-                                <Image w='90%' src='https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Group_4_33e283b0-408a-4f86-9fe5-f2466c8d8193.png?v=1626870394' />
+                                <Image mt='20px' w='90%' src='https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Group_4_33e283b0-408a-4f86-9fe5-f2466c8d8193.png?v=1626870394' />
                             </Box>
                         </Box>
                     </Box>

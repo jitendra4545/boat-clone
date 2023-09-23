@@ -68,7 +68,7 @@ export const GetCart=()=>(dispatch)=>{
 
 export const CartAdd=({id})=>(dispatch)=>{
     dispatch(CartAddPending())
-    fetch(`http://localhost:3200/product/add_cart/${id}`,{
+   return fetch(`http://localhost:3200/product/add_cart/${id}`,{
         method:"POST",
         headers:{
           "Content-Type":"application/json",
@@ -77,8 +77,8 @@ export const CartAdd=({id})=>(dispatch)=>{
         body:JSON.stringify()
        }).then(res=>res.json())
         .then((res)=>{
-           console.log(res)
-                dispatch(CartAddSuccees())
+           console.log(res)   
+            dispatch(CartAddSuccees())
              
         }).catch(err=>{
             console.log(err)
