@@ -30,11 +30,11 @@ export default function LoginDetails() {
 const navigate=useNavigate()
   const handleLogin=async()=>{
       dispatch(UserLogin({email,password})).then(()=>{
-      // if(JSON.parse(localStorage.getItem("token"))){
+       if(token){
         navigate("/")
-      // }else{
-      //   alert('Token Not Found')
-      // }
+      }else{
+        alert('Token Not Found')
+      }
          
        
       })

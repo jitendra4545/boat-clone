@@ -34,7 +34,7 @@ const toast = useToast()
 
     // console.log("el", el)
     return (
-        <Box bg='blue.100' borderRadius={'10px'} mb='10px'>
+        <Box bg='white' borderRadius={'10px'} mb='10px'>
             <Box display={'grid'} gridTemplateColumns={"repeat(4,1fr)"} p='5px 10px' justifyContent={'space-between'} alignItems={'center'} gap='4' >
                 
                     <Box  display={'flex'} justifyContent={'center'} alignItems={'center'}>
