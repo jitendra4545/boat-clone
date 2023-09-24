@@ -1,10 +1,58 @@
 import { Box, Button, FormLabel, Input, Select, Text } from '@chakra-ui/react'
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-
+import { Link, useNavigate } from 'react-router-dom'
+import useRazorpay from "react-razorpay";
 export const AddressPaymentCard = ({ total }) => {
   const [DeliveryCharge, SetDeliveryCharge] = useState(0)
   console.log("dsds", DeliveryCharge, total)
+  // const [GrandTotal,setGrandTotal]=useState(total+DeliveryCharge)
+const navigate=useNavigate()
+const Razorpay = useRazorpay();
+const handlePayment=()=>{
+  
+ 
+    if(total === ""){
+      alert("please enter amount");
+      }else{
+        var options = {
+          key: "rzp_test_xH9YL54czoLC7V",
+          key_secret:"9N9w6RIxCGi6rb2SpbaHLMgM",
+          amount: (total *100),
+          currency:"INR",
+          name:"STARTUP_PROJECTS",
+          description:"for testing purpose",
+          handler: function(response){
+            alert(response.razorpay_payment_id);
+
+
+            
+            navigate("/")
+            // axios.post(`https://api.itaxeasy.com/payment/verify`,{response:response})
+            // .then((res)=>{
+            //   console.log("res",res)
+            // }).catch(err=>console.log(err))
+          },
+          // prefill: {
+          //   name:"Velmurugan",
+          //   email:"mvel1620r@gmail.com",
+          //   contact:"7904425033"
+          // },
+          notes:{
+            address:"Razorpay Corporate office"
+          },
+          theme: {
+            color:"#3399cc"
+          }
+        };
+        var pay = new window.Razorpay(options);
+        pay.open();
+
+      }
+  
+
+}
+
+
   return (
     <Box fontWeight={'bold'} m="15px 0px">
       <FormLabel m="15px 0px">SHIPPING</FormLabel>
@@ -38,7 +86,7 @@ export const AddressPaymentCard = ({ total }) => {
         <Text >Grand Total</Text>
         <Text >Rs. {total - DeliveryCharge} /-</Text>
       </Box>
-    <Button bg='green' _hover={{ bg: "green" }} color={'white'} mt='20px' w='100%'>PROCEED TO PAYMENT</Button>
+    <Button onClick={handlePayment} bg='green' _hover={{ bg: "green" }} color={'white'} mt='20px' w='100%'>PROCEED TO PAYMENT</Button>
     </Box>
   )
 }

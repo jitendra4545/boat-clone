@@ -1,15 +1,26 @@
-import { Box, Button, Checkbox, Image, Radio, Text } from '@chakra-ui/react'
+import { Box, Button, Checkbox, Image, Radio, Text, useToast } from '@chakra-ui/react'
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import {RiDeleteBin6Fill} from 'react-icons/ri'
+import { DeleteAddress, GetADdress } from '../../redux/AddressReducer/action'
 export const AddressCard = (el) => {
 
     const [CurrAddress, setCurrAddress] = useState(false)
-
+const dispatch=useDispatch()
     console.log(CurrAddress)
-
-    const handleRemove=()=>{
-
+const toast=useToast()
+    const handleRemove=(id)=>{
+        dispatch(DeleteAddress({id})).then(()=>{
+            dispatch(GetADdress())
+            toast({
+                title: 'Address Removed Successfully ',
+                description: "Your Address Removed Successfully   ",
+                status: 'success',
+                duration: 5000,
+                isClosable: true,
+              })
+              
+        })
     }
 
     // const {Address}=useSelector((store)=>store.AddressReducer)
@@ -30,7 +41,7 @@ export const AddressCard = (el) => {
            <Text>{el.mobile}</Text>
            </Box>
            <Box display={'flex'} gap='4'>
-            <Button bg='red' color={'white'} fontSize={'xl'}  _hover={{'bg':"red"}}>
+            <Button onClick={()=>handleRemove(el._id)} bg='red' color={'white'} fontSize={'xl'}  _hover={{'bg':"red"}}>
             <RiDeleteBin6Fill/>
             </Button>
             <Radio

@@ -105,3 +105,28 @@ export const GetADdress = () => (dispatch) => {
             dispatch(AddressAddFailure())
         })
 }
+
+
+
+
+
+export const DeleteAddress=({id})=>(dispatch)=>{
+    console.log("delete",id)
+dispatch(AddressDeletePending())
+   return fetch(`http://localhost:3200/user/address/${id}`,{
+        method:"DELETE",
+        headers:{
+            "Content-Type":"application/json",
+            "Authorization":JSON.parse(localStorage.getItem("token"))
+        }
+      
+    }).then(res=>res.json())
+    .then((res)=>{
+        console.log(res)
+        dispatch(AddressDeleteSuccees(res))
+    }).catch((err)=>{
+        dispatch(AddressDeleteFailure())
+    })
+
+
+}

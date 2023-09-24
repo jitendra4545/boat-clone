@@ -2,12 +2,8 @@ import { Box, Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, Draw
 import React, { useEffect, useState } from 'react'
 import { Navbar } from '../components/Navbar'
 import { useDispatch, useSelector } from 'react-redux'
-import { GetCart } from '../redux/CartReducer/action'
-import { CartCard } from '../components/CartPage/CartCard'
-import { CartPaymentCard } from '../components/CartPage/CartPaymentCard'
-import { CartNav } from '../components/CartPage/CartNav'
+
 import { Loader } from '../components/Loader'
-import { Footer } from './Footer'
 import { Slider4 } from '../components/Homepage/Slider4'
 import { AddressPaymentCard } from '../components/AddressPage/AddressPaymentCard'
 import { AddAddress, GetADdress } from '../redux/AddressReducer/action'
@@ -25,7 +21,7 @@ const [state, setState] = useState("")
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = React.useRef()
   const dispatch = useDispatch()
-  const { cart, isLoading, isError } = useSelector((store) => store.CartReducer)
+  const { cart } = useSelector((store) => store.CartReducer)
   const [TotalPrice, setTotalPrice] = useState(0)
   const toast=useToast()
   
@@ -40,7 +36,7 @@ const [state, setState] = useState("")
   console.log("dssdhsdf", TotalPrice)
   console.log("Update,reducer", cart)
 
-   const {Address}=useSelector((store)=>store.AddressReducer)
+   const {Address, isLoading, isError}=useSelector((store)=>store.AddressReducer)
 
    console.log("dfdf",Address)
 
@@ -48,7 +44,7 @@ const [state, setState] = useState("")
  dispatch(AddAddress({name,mobile,pincode,address,city,state,landmark})).then(()=>{
   dispatch(GetADdress())
   toast({
-    title: 'Added Successfully Added',
+    title: 'Address Successfully Added',
     description: "Congratulatios! You are Few step away from your Order   ",
     status: 'success',
     duration: 5000,
@@ -60,11 +56,13 @@ const [state, setState] = useState("")
     
   }
 
-
+useEffect(()=>{
+  dispatch(GetADdress())
+},[])
 
   useEffect(() => {
     handleTotal()
-     dispatch(GetADdress())
+     
   }, [cart])
 
   return (
@@ -73,8 +71,8 @@ const [state, setState] = useState("")
         <Navbar />
       </Box>
       <Box m='auto' h='' p='30px 0px'>
-        {
-          Address.length > 0 && <Grid
+        
+          <Grid
             w={{ base: "99%", md: "95%", lg: "90%" }}
             m='auto'
 
@@ -85,21 +83,24 @@ const [state, setState] = useState("")
 
 
             <GridItem bg='skyblue' boxShadow={'lg'} borderRadius={'10px 0px 0px 10px'} p={{ base: "10px 0px", md: "20px 20px", lg: "30px 70px" }} colSpan={4}  >
-              <Flex mb='20px' justifyContent={'center'}>
-                <Box>
-                  <Heading fontSize={'2xl'}  >Your Address</Heading>
-                </Box>
+         {
+          Address.length>0 &&<> <Flex mb='20px' justifyContent={'center'}>
+          <Box>
+            <Heading fontSize={'2xl'}  >Your Address</Heading>
+          </Box>
 
-              </Flex>
-              <hr />
-              <Box mt='20px' fontWeight={'bold'} gap='5' textAlign={'left'} display={'grid'} gridTemplateColumns={'repeat(5,1fr)'}>
-                <Text>Name</Text>
+        </Flex>
+        <hr />
+        <Box mt='20px' fontWeight={'bold'} gap='5' textAlign={'left'} display={'grid'} gridTemplateColumns={'repeat(5,1fr)'}>
+          <Text>Name</Text>
 
-                <Text>Address</Text>
-                <Text>Pincode</Text>
-                <Text>Mobile</Text>
-                <Text>Choose/Remove</Text>
-              </Box>
+          <Text>Address</Text>
+          <Text>Pincode</Text>
+          <Text>Mobile</Text>
+          <Text>Choose/Remove</Text>
+        </Box>
+        </>
+         }     
 
               {
                 isLoading ? <Loader />
@@ -235,7 +236,7 @@ const [state, setState] = useState("")
 
             </GridItem>
           </Grid>
-        }
+        
 
         {/* {
           cart.length == 0 && <Box display={'flex'} justifyContent={'center'} alignItems={'center'}>
