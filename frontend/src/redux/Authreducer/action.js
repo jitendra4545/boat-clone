@@ -97,10 +97,11 @@ export const UserLogin = ({ email, password }) => (dispatch) => {
 
     return axios.post("http://localhost:3200/user/login",payload)
         .then((res) => {
-            dispatch(UserLoginSuccees(res.data.token))
-            console.log(res.data)
-            alert(res.data.msg)
             localStorage.setItem("token",JSON.stringify(res.data.token))
+            dispatch(UserLoginSuccees(res.data.token))
+            
+            alert(res.data.msg)
+          
         }).catch((err) => {
             console.log(err)
             dispatch(UserLoginFailure(err))

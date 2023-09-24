@@ -14,10 +14,7 @@ export const HeadPhonePage = () => {
   const { product, isLoading, isError } = useSelector((store) => store.AppReducer)
 
 
-  useEffect(() => {
-    dispatch(GetData())
-
-  }, [])
+  
 
 
   console.log(product)

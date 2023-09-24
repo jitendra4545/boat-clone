@@ -10,14 +10,11 @@ import { Loader } from '../../components/Loader'
 
 export const EarbudPage = () => {
 
-  const dispatch = useDispatch()
+  
   const { product, isLoading, isError } = useSelector((store) => store.AppReducer)
 
 
-  useEffect(() => {
-    dispatch(GetData())
-
-  }, [])
+  
 
 
   console.log(product)

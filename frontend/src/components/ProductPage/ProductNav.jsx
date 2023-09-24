@@ -1,9 +1,17 @@
 import { ChevronDownIcon } from '@chakra-ui/icons'
 import { Box, Button, Flex, Heading, Menu, MenuButton, MenuItem, MenuList, Text } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { CiFilter } from 'react-icons/ci'
 import { TbArrowsSort } from 'react-icons/tb'
+import { useDispatch } from 'react-redux'
+import { GetData } from '../../redux/AppReducer/action'
 export const ProductNav = () => {
+
+    const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(GetData())
+    
+      }, [])
 
     const [sort, setsort] = useState("")
 

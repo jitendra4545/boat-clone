@@ -98,7 +98,7 @@ export const GetCart = () => (dispatch) => {
             dispatch(CartGetSuccees(res))
         }).catch((err) => {
             console.log(err)
-            dispatch(CartUpdateFailure())
+            dispatch(CartGetFailure())
         })
 }
 

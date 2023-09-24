@@ -14,10 +14,7 @@ export const SpeakerPage = () => {
   const { product, isLoading, isError } = useSelector((store) => store.AppReducer)
 
 
-  useEffect(() => {
-    dispatch(GetData())
-
-  }, [])
+  
 
 
   console.log(product)
