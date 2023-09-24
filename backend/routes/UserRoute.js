@@ -121,7 +121,7 @@ UserRouter.post("/address", Authorization, async (req, res) => {
     try {
         let address = new AddressModel(data)
         await address.save()
-        res.send({ "msg": "Address added to the cart successfully" })
+        res.send({ "msg": "Address added  successfully" })
     } catch (err) {
         res.send({ "msg": "somthing went wrong! cannot add the address", "error": err.message })
     }
@@ -133,9 +133,9 @@ UserRouter.post("/address", Authorization, async (req, res) => {
 
 UserRouter.delete("/address/:id", Authorization, async (req, res) => {
     const id = req.params.id
-
+ 
     try {
-        await AddressModel.delete({ _id: id })
+        await AddressModel.findOneAndDelete({ _id: id })
         res.send({ "msg": "Address has been deleted" })
     } catch (err) {
         res.send({ "msg": "somthing went wrong! cannot delete", "error": err.message })

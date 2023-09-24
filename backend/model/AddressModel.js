@@ -6,12 +6,12 @@ const AddressSchema=mongoose.Schema({
     UserId:String,
     mobile:Number,
     pincode:Number,
-    locality:String,
+   
     address:String,
     city:String,
     state:String,
     landmark:String,
-    alt_mobile:Number,
+  
 },{
     versionKey:false,
     timestamps:true
