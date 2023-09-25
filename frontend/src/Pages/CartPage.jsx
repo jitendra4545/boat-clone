@@ -1,4 +1,4 @@
-import { Box, Flex, Grid, GridItem, Heading, Image, Text, useDisclosure } from '@chakra-ui/react'
+import { Box, Button, Flex, Grid, GridItem, Heading, Image, Text, useDisclosure } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { Navbar } from '../components/Navbar'
 import { useDispatch, useSelector } from 'react-redux'
@@ -9,6 +9,7 @@ import { CartPaymentCard } from '../components/CartPage/CartPaymentCard'
 import { Loader } from '../components/Loader'
 import { Footer } from './Footer'
 import { Slider4 } from '../components/Homepage/Slider4'
+import { Link } from 'react-router-dom'
 
 
 export const CartPage = () => {
@@ -71,7 +72,7 @@ export const CartPage = () => {
               </Box>
 
               {
-                isLoading ? <Loader />
+                isLoading ? <Loader mt='20px' />
 
                   :
                   <Box mt='20px'>
@@ -81,8 +82,10 @@ export const CartPage = () => {
                     })}
                   </Box>
               }
-
-
+          
+              {cart.length>0 && <Box mt='25px' textAlign={'center'}>
+               <Link to='/earbud'> <Button bg={'white'} color={'skyblue'} margin={'auto'}>Continue Shopping</Button></Link>
+                </Box>}
             </GridItem>
             <GridItem bg="blackAlpha.200" position={{ base: "", md: "", lg: "fixed" }} right={{ base: "", md: "", lg: "35px" }} p={{ base: "10px 50px", md: "20px 10px", lg: "30px 10px" }} boxShadow={'lg'} h={{ base: "auto", md: "auto", lg: 'auto' }} rowSpan={2}  >
 
@@ -107,8 +110,8 @@ export const CartPage = () => {
         }
 
         {
-          cart.length == 0 && <Box display={'flex'} justifyContent={'center'} alignItems={'center'}>
-            <Box >
+          (cart.length == 0 && isLoading==false )&& <Box mt='20px' display={'flex'} justifyContent={'center'} alignItems={'center'}>
+            <Box  >
               <Heading textAlign={'center'}>Your Cart is Empty!</Heading>
               <Image w='90%' src='https://cdn.dribbble.com/users/887568/screenshots/3172047/ufo.gif' />
             </Box>

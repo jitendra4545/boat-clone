@@ -13,6 +13,7 @@ import { HeadPhonePage } from './ProductPages/HeadPhonePage'
 import { SpeakerPage } from './ProductPages/SpeakerPage'
 import { RequiredAuth } from './RequiredAuth'
 import { Admin } from './Admin'
+import { AllProducts } from '../components/AdminPage/AllProducts'
 
 export const AllRoutes = () => {
   return (
@@ -43,9 +44,16 @@ export const AllRoutes = () => {
         </RequiredAuth>
       } />
 
-      <Route path='/admin' element={<RequiredAuth>
+      <Route path='/admin' element={
+      <RequiredAuth>
         <Admin />
-      </RequiredAuth>} />
+      </RequiredAuth>
+    } />
+     <Route path='/admin/allproduct' element={
+      <RequiredAuth>
+        <AllProducts />
+      </RequiredAuth>
+    } /> 
 
     </Routes>
   )
