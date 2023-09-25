@@ -1,11 +1,12 @@
-import { USER_GET_SUCCESS, USER_LOGIN_FAILURE, USER_LOGIN_PENDING, USER_LOGIN_SUCCESS, USER_REGISTER_FAILURE, USER_REGISTER_PENDING, USER_REGISTER_SUCCESS } from "./actionTypes"
+import { SINGLE_USER_SUCCESS, USER_GET_SUCCESS, USER_LOGIN_FAILURE, USER_LOGIN_PENDING, USER_LOGIN_SUCCESS, USER_LOGOUT_SUCCESS, USER_REGISTER_FAILURE, USER_REGISTER_PENDING, USER_REGISTER_SUCCESS } from "./actionTypes"
 
 
 const initialState = {
     token: '',
     users: [],
     isLoading: false,
-    isError: false
+    isError: false,
+    ActiveUser:[]
 }
 
 
@@ -50,7 +51,19 @@ export const reducer = (state = initialState, action) => {
     
     case USER_GET_SUCCESS:{
         return {
-            ...state,user:payload,isLoading: false, isError: false
+            ...state,users:payload,isLoading: false, isError: false
+        }
+    }
+
+    case USER_LOGOUT_SUCCESS:{
+        return{
+            ...state,isLoading: false, isError: false
+        }
+    }
+
+    case SINGLE_USER_SUCCESS:{
+        return {
+            ...state,ActiveUser:payload,isLoading: false, isError: false
         }
     }
 

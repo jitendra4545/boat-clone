@@ -16,6 +16,7 @@ const toast=useToast()
                 title: 'Address Removed Successfully ',
                 description: "Your Address Removed Successfully   ",
                 status: 'success',
+                position:"top",
                 duration: 5000,
                 isClosable: true,
               })

@@ -30,15 +30,13 @@ export default function LoginDetails() {
 const navigate=useNavigate()
   const handleLogin=async()=>{
       dispatch(UserLogin({email,password})).then(()=>{
-     
+       localStorage.setItem("email",(email))
         navigate("/")
      
       })
   }
 
-useEffect(()=>{
- dispatch(GetUser())
-},[])
+
 
   return (
     <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }}>

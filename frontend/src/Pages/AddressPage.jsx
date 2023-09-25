@@ -48,6 +48,7 @@ const [state, setState] = useState("")
     description: "Congratulatios! You are Few step away from your Order   ",
     status: 'success',
     duration: 5000,
+    position: 'top',
     isClosable: true,
   })
   
@@ -216,7 +217,7 @@ useEffect(()=>{
 
 
             </GridItem>
-            <GridItem bg="blackAlpha.200" position={{ base: "", md: "", lg: "fixed" }} right={{ base: "", md: "", lg: "35px" }} p={{ base: "10px 50px", md: "20px 10px", lg: "30px 10px" }} boxShadow={'lg'} h={{ base: "auto", md: "auto", lg: 'auto' }} rowSpan={2}  >
+            <GridItem bg="blackAlpha.200" position={{ base: "", md: "", lg: "fixed" }} right={{ base: "", md: "", lg: "35px" }} p={{ base: "10px 50px", md: "20px 10px", lg: "30px 10px" }} boxShadow={'lg'} h={{ base: "auto", md: "auto", lg: 'auto' }}  rowSpan={2}  >
 
               <Box mb='20px' >
                 <Box>
@@ -237,15 +238,6 @@ useEffect(()=>{
             </GridItem>
           </Grid>
         
-
-        {/* {
-          cart.length == 0 && <Box display={'flex'} justifyContent={'center'} alignItems={'center'}>
-            <Box >
-              <Heading textAlign={'center'}>Click he </Heading>
-              <Image w='90%' src='https://cdn.dribbble.com/users/887568/screenshots/3172047/ufo.gif' />
-            </Box>
-          </Box>
-        } */}
 
       </Box>
       <Box p='50px 30px' bg="white">

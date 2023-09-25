@@ -27,6 +27,7 @@ export const ProductCard = ({ _id, feature, feature2, feature3, feature4, priori
                 status: 'success',
                 duration: 5000,
                 isClosable: true,
+                position:'top'
               })
               navigate('/cart')
         })

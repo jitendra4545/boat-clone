@@ -2,9 +2,13 @@ import { Box, Button, FormLabel, Input, Select, Text } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import useRazorpay from "react-razorpay";
+import { useSelector } from 'react-redux';
 export const AddressPaymentCard = ({ total }) => {
   const [DeliveryCharge, SetDeliveryCharge] = useState(0)
   console.log("dsds", DeliveryCharge, total)
+
+  const {Address, isLoading, isError}=useSelector((store)=>store.AddressReducer)
+
   // const [GrandTotal,setGrandTotal]=useState(total+DeliveryCharge)
 const navigate=useNavigate()
 const Razorpay = useRazorpay();
@@ -22,15 +26,9 @@ const handlePayment=()=>{
           name:"STARTUP_PROJECTS",
           description:"for testing purpose",
           handler: function(response){
-            alert(response.razorpay_payment_id);
+            alert("Payment Successful   Id :",response.razorpay_payment_id);
 
-
-            
             navigate("/")
-            // axios.post(`https://api.itaxeasy.com/payment/verify`,{response:response})
-            // .then((res)=>{
-            //   console.log("res",res)
-            // }).catch(err=>console.log(err))
           },
           // prefill: {
           //   name:"Velmurugan",
@@ -86,7 +84,11 @@ const handlePayment=()=>{
         <Text >Grand Total</Text>
         <Text >Rs. {total - DeliveryCharge} /-</Text>
       </Box>
-    <Button onClick={handlePayment} bg='green' _hover={{ bg: "green" }} color={'white'} mt='20px' w='100%'>PROCEED TO PAYMENT</Button>
+ { Address.length>0 ? <Button onClick={handlePayment} bg='green' _hover={{ bg: "green" }} color={'white'} mt='20px' w='100%'>PROCEED TO PAYMENT</Button>
+
+:
+<Button disabled bg='green' _hover={{ bg: "green" }} color={'white'} mt='20px' w='100%'>ADD ADDRESS TO CONTINUE</Button>
+}   
     </Box>
   )
 }

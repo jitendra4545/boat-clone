@@ -24,6 +24,7 @@ export const SingleDataCard = ({ data }) => {
                 title: 'Product Successfully Added',
                 description: "Congratulatios! Product added to your cart   ",
                 status: 'success',
+                position:"top",
                 duration: 5000,
                 isClosable: true,
               })

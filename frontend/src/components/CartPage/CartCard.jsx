@@ -25,6 +25,7 @@ export const CartCard = (el) => {
                 description: " Product suceesfully removed from your cart   ",
                 status: 'success',
                 duration: 5000,
+                position:"top",
                 isClosable: true,
             })
 
