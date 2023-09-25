@@ -7,13 +7,14 @@ const { ProductRouter } = require('./routes/ProductRoute')
 const { NewProductModel } = require('./model/LatestProducts')
 const { CartModel } = require('./model/CartModel')
 const { Authorization } = require('./middleware/auth')
+const { AdminRouter } = require('./routes/AdminRoutes')
 const app = express()
 app.use(express.json())
 require('dotenv').config()
 app.use(cors())
 app.use("/user", UserRouter)
 app.use('/product',ProductRouter)
-
+app.use("/admin",AdminRouter)
 
 app.get('/', (req, res) => {
     res.send(`Welcome to boat LifeStyle`)
