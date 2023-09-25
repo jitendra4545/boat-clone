@@ -92,6 +92,23 @@ res.send(allUser)
 })
 
 
+// <----  THE CODE HEPLS TO GET SINGLE USER DETAILS  ---->
+
+
+UserRouter.get("/single",Authorization,async(req,res)=>{
+    
+    let id=req.body.UserId
+console.log("email",id)
+    try{
+         let SingleData=await UserModel.find({_id:id})
+         res.send(SingleData)    
+    }catch(err){
+        res.send({ "msg": "somthing went wrong! cannot get data", "error": err.message })
+    }
+
+})
+
+
 
 // <----  THE CODE HEPLS TO LOGOUT USER ---->
 
@@ -141,6 +158,8 @@ UserRouter.delete("/address/:id", Authorization, async (req, res) => {
         res.send({ "msg": "somthing went wrong! cannot delete", "error": err.message })
     }
 })
+
+
 
 
 
