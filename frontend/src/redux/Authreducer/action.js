@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom"
-import { SINGLE_USER_SUCCESS, USER_GET_FAILURE, USER_GET_PENDING, USER_GET_SUCCESS, USER_LOGIN_FAILURE, USER_LOGIN_PENDING, USER_LOGIN_SUCCESS, USER_LOGOUT_SUCCESS, USER_REGISTER_FAILURE, USER_REGISTER_PENDING, USER_REGISTER_SUCCESS } from "./actionTypes"
+import { SINGLE_USER_SUCCESS, USER_DELETE_FAILURE, USER_DELETE_PENDING, USER_DELETE_SUCCESS, USER_GET_FAILURE, USER_GET_PENDING, USER_GET_SUCCESS, USER_LOGIN_FAILURE, USER_LOGIN_PENDING, USER_LOGIN_SUCCESS, USER_LOGOUT_SUCCESS, USER_REGISTER_FAILURE, USER_REGISTER_PENDING, USER_REGISTER_SUCCESS } from "./actionTypes"
 import axios from 'axios'
 
 const UserRegisterSuccees = (payload) => {
@@ -64,8 +64,30 @@ const UserLogoutSuccees = () => {
     }
 }
 
+
+
+const UserDeleteFailure = () => {
+    return {
+        type: USER_DELETE_FAILURE
+    }
+}
+
+const UserDeletePending = () => {
+    return {
+        type: USER_DELETE_PENDING
+    }
+}
+
+const UserDeleteSuccees = (payload) => {
+    return {
+        type: USER_DELETE_SUCCESS, payload
+    }
+}
+
+
+
 const GetSingleUserSuccees = (payload) => {
-  
+
     return {
         type: SINGLE_USER_SUCCESS, payload
     }
@@ -73,15 +95,8 @@ const GetSingleUserSuccees = (payload) => {
 
 
 export const SingleUserData = () => (dispatch) => {
-//   console.log("email",email)
-//     axios.get(`http://localhost:3200/user/single/${email}`)
-//     .then((res)=>{
-//         console.log(res)
-//     }).catch(err=>console.log(err))
 
-
-
-   return fetch(`http://localhost:3200/user/single/`, {
+    return fetch(`http://localhost:3200/user/single/`, {
         headers: {
             "Content-Type": "application/json",
             "Authorization": JSON.parse(localStorage.getItem("token"))
@@ -145,6 +160,8 @@ export const UserRegister = ({ name, email, mobile, password, isAdmin }) => (dis
 
 
 
+
+
 export const UserLogin = ({ email, password }) => (dispatch) => {
     dispatch(UserLoginPending())
     const payload = {
@@ -168,6 +185,26 @@ export const UserLogin = ({ email, password }) => (dispatch) => {
         })
 
 }
+
+
+export const UserDelete = ({ id }) => (dispatch) => {
+    dispatch(UserDeletePending())
+  return  fetch(`http://localhost:3200/admin/user/${id}`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": JSON.parse(localStorage.getItem("token"))
+        },
+    }).then(res => res.json())
+        .then((res) => {
+            console.log(res)
+            dispatch(UserDeleteSuccees(res))
+        }).catch((err) => {
+            console.log(err)
+            dispatch(UserDeleteFailure())
+        })
+}
+
 
 
 

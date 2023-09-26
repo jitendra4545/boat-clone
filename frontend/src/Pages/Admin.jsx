@@ -5,16 +5,17 @@ import { AllRoutes } from './AllRoutes'
 import { Link } from 'react-router-dom'
 import { AdminSidebar } from '../components/AdminPage/AdminSidebar'
 import { AdminNav } from '../components/AdminPage/AdminNav'
+import { Dashboard } from '../components/AdminPage/Dashboard'
 export const Admin = () => {
   return (
-   <Box>
-     <AdminNav/>
-      <Box  display={'grid'} gridTemplateColumns={'300px auto'}>
-        <AdminSidebar/>
-        <Box bg='blue.700' border={'1px solid blue'} >
-        
-        </Box>
-      </Box>
-   </Box>
+    <Box>
+    <AdminNav/>
+     <Box h='90vh' display={'grid'} gap='5' gridTemplateColumns={'230px auto'}>
+       <AdminSidebar/>
+       <Box  border={'1px solid blue'} >
+            <Dashboard/>
+       </Box>
+     </Box>
+  </Box>
   )
 }

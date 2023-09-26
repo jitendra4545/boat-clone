@@ -14,6 +14,9 @@ import { SpeakerPage } from './ProductPages/SpeakerPage'
 import { RequiredAuth } from './RequiredAuth'
 import { Admin } from './Admin'
 import { AllProducts } from '../components/AdminPage/AllProducts'
+import { AllUsers } from '../components/AdminPage/AllUsers'
+import { AddNewProd } from '../components/AdminPage/AddNewProd'
+import { BluetoothHead } from './ProductPages/BluetoothHead'
 
 export const AllRoutes = () => {
   return (
@@ -23,6 +26,8 @@ export const AllRoutes = () => {
       <Route path='/speaker' element={<SpeakerPage />} />
       <Route path='/headphone' element={<HeadPhonePage />} />
       <Route path='/watch' element={<WatchPage />} />
+      {/* /bluetoothHeadphone */}
+      <Route path='/bluetoothHeadphone' element={<BluetoothHead/>} />
       <Route path='/cart' element={
         <RequiredAuth>
           <CartPage />
@@ -52,6 +57,18 @@ export const AllRoutes = () => {
      <Route path='/admin/allproduct' element={
       <RequiredAuth>
         <AllProducts />
+      </RequiredAuth>
+    } />
+
+    <Route path='/admin/allusers' element={
+      <RequiredAuth>
+        <AllUsers />
+      </RequiredAuth>
+    } /> 
+
+<Route path='/admin/addnewprod' element={
+      <RequiredAuth>
+        <AddNewProd />
       </RequiredAuth>
     } /> 
 

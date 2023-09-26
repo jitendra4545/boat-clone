@@ -12,7 +12,7 @@ export const AdminNav = () => {
        dispatch(GetUser())
     },[])
   return (
-    <Box h='10vh' border={'2px solid red'}>
+    <Box h='10vh' position={'sticky'} top='0' zIndex={'1000'} bg={'white'} >
     navbar
    </Box>
   )

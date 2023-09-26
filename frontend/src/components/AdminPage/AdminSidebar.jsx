@@ -8,8 +8,8 @@ import {MdDashboard} from 'react-icons/md'
 import { RiLogoutBoxLine } from 'react-icons/ri'
 export const AdminSidebar = () => {
   return (
-    <Box h='90vh' bg='blue.900'   border={'1px solid green'}>
-    <Box bg='blue.900'  display={'grid'} gap="6" color={'white'}  >
+    <Box  >
+    <Box  boxShadow={' 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);'} bg={'blue.900'} color={'white'} position={'fixed'} h='90vh'   left={0} display={'grid'} gap={'6'}  >
         <Link to='/admin'>
          <Box _hover={{bg:"white",color:"blue.900"}} mt='20px' p='10px 20px' display={'flex'} gap='4' fontSize={'20px'} justifyContent={'left'} alignItems={'center'} >
          <MdDashboard  />  <Heading fontSize={'lg'}>  Dashboard</Heading>
@@ -20,18 +20,28 @@ export const AdminSidebar = () => {
          <BsCartPlus/>  <Heading fontSize={'lg'}>  Products</Heading>
          </Box>
          </Link>
+         <Link to='/admin/addnewprod'>
          <Box _hover={{bg:"white",color:"blue.900"}} p='10px 20px' display={'flex'} gap='4' fontSize={'20px'} justifyContent={'left'} alignItems={'center'} >
          <BsBagPlusFill/>  <Heading fontSize={'lg'}>  Add New Product</Heading>
          </Box>
+         </Link>
+         
+         <Link to='/admin/allusers'>
          <Box _hover={{bg:"white",color:"blue.900"}} p='10px 20px' display={'flex'} gap='4' fontSize={'20px'} justifyContent={'left'} alignItems={'center'} >
          <FiUsers/>  <Heading fontSize={'lg'}>  Users</Heading>
          </Box>
+         </Link>
+         <Link>
          <Box _hover={{bg:"white",color:"blue.900"}} p='10px 20px' display={'flex'} gap='4' fontSize={'20px'} justifyContent={'left'} alignItems={'center'} >
          <CgMore/>  <Heading fontSize={'lg'}>  More</Heading>
          </Box>
-         <Box _active={{bg:"red"}} _hover={{bg:"white",color:"blue.900"}} p='10px 20px' display={'flex'} gap='4' fontSize={'20px'} justifyContent={'left'} alignItems={'center'} >
+         </Link>
+         <Link>
+         <Box mb={'20px'}  _hover={{bg:"white",color:"blue.900"}} p='10px 20px' display={'flex'} gap='4' fontSize={'20px'} justifyContent={'left'} alignItems={'center'} >
          <RiLogoutBoxLine/>  <Heading fontSize={'lg'}>  Logout</Heading>
          </Box>
+         </Link>
+         
     </Box>
 </Box>
   )

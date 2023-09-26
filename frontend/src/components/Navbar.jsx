@@ -18,8 +18,8 @@ const navItems = [
 
    
     {
-        name: "Daily Deals",
-        link: ""
+        name: "BluetoothHeadphone",
+        link: "/bluetoothHeadphone"
     }, {
 
         name: "Gift With Boat",
@@ -53,7 +53,8 @@ const product=[
         img:"https://www.boat-lifestyle.com/cdn/shop/files/Wireless-Speaker_small.png?v=1684842854",
         link:"/speaker",
         "txt":"Party Speakers"
-    }
+    },
+   
 ]
 
 
