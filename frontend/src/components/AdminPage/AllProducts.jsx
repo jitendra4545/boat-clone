@@ -4,8 +4,10 @@ import { AdminNav } from './AdminNav'
 import { AdminSidebar } from './AdminSidebar'
 import { useDispatch, useSelector } from 'react-redux'
 import { DeleteData, GetData } from '../../redux/AppReducer/action'
+import { Link, useNavigate } from 'react-router-dom'
 
 export const AllProducts = () => {
+    const navigate=useNavigate()
 const dispatch=useDispatch()
     const { isLoading, isError, product } = useSelector((store) => store.AppReducer)
     console.log(product)
@@ -16,6 +18,8 @@ const handleDelete=(id)=>{
  })
  console.log("erreerer",id)
 }
+
+
 
 
     return (
@@ -65,7 +69,8 @@ const handleDelete=(id)=>{
                                             <Button onClick={()=>handleDelete(el._id)}>Delete</Button>
                                         </Td>
                                         <Td>
-                                            <Button>Edit</Button>
+                                           <Link to={`/admin/edit/${el._id}`}><Button  >Edit</Button>
+                                           </Link> 
                                         </Td>
                                     </Tr>
                                 })

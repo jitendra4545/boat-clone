@@ -1,9 +1,15 @@
 import { Box, Button, FormControl, FormLabel, Heading, Input, Select } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { AdminNav } from './AdminNav'
 import { AdminSidebar } from './AdminSidebar'
+import { useDispatch, useSelector } from 'react-redux'
+import { AddData, EditData, GetSingleData } from '../../redux/AppReducer/action'
+import { useNavigate, useParams } from 'react-router-dom'
 
 export const AddNewProd = () => {
+
+    const {isLoading,isError,singleprod}=useSelector((store)=>store.AppReducer)
+
     const [category, setcategory] = useState("")
     const [price, setprice] = useState("")
     const [price2, setprice2] = useState("")
@@ -16,6 +22,68 @@ export const AddNewProd = () => {
     const [product_item_meta__title, setproduct_item_meta__title] = useState("")
     const [product_item__primary_image, setproduct_item__primary_image] = useState("")
     const [product_item__secondary_image, setproduct_item__secondary_image] = useState("")
+
+
+    const params=useParams()
+    const {id}=params
+
+    console.log(id)
+
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const handleAdd = () => {
+        if (category == "" ||
+            price == "" || price2 == "" || product_item__primary_image == "" || 
+            product_item_meta__title == "" || priority == "" ||
+            feature == "") {
+            alert("Fill all the Fields")
+        } else {
+            const payload = {
+                category,
+                price, price2, product_item__primary_image, product_item__secondary_image,
+                product_item_meta__title, priority, priority2, priority3,
+                feature, feature2, feature3
+            }
+            dispatch(AddData(payload)).then(() => {
+                navigate('/admin/allproduct')
+            })
+        }
+
+    }
+
+    useEffect(()=>{
+        if(id){
+            dispatch(GetSingleData({id}))
+            setproduct_item_meta__title(singleprod[0]?.product_item_meta__title)
+            setproduct_item__primary_image(singleprod[0]?.product_item__primary_image)
+            setproduct_item__secondary_image(singleprod[0]?.product_item__secondary_image)
+     setprice(singleprod[0]?.price)
+     setprice2(singleprod[0]?.price2)
+     setfeature(singleprod[0]?.feature)
+     setfeature2(singleprod[0]?.feature2)
+     setfeature3(singleprod[0]?.feature3)
+     setpriority(singleprod[0]?.priority)
+     setpriority2(singleprod[0]?.priority2)
+     setpriority3(singleprod[0]?.priority3)
+        }
+     
+      
+    },[])
+
+    console.log(singleprod)
+
+    const handleEdit=(id)=>{
+console.log(id)
+dispatch(EditData({id, category,
+    price, price2, product_item__primary_image, product_item__secondary_image,
+    product_item_meta__title, priority, priority2, priority3,
+    feature, feature2, feature3})).then(()=>{
+    navigate("/admin/allproduct")
+})
+    }
+
+
+
     return (
         <Box>
             <AdminNav />
@@ -23,83 +91,93 @@ export const AddNewProd = () => {
                 <AdminSidebar />
                 <Box border={'1px solid blue'} >
                     <Box color={'white'} bg='blue.900' paddingTop={'20px'} paddingBottom={'20px'} >
-                        <Heading textAlign={'center'} fontSize={'20px'}>ADD NEW PRODUCTS</Heading>
+                       {!id ?  <Heading textAlign={'center'} fontSize={'20px'}>ADD NEW PRODUCTS</Heading>: <Heading textAlign={'center'} fontSize={'20px'}>EDIT PRODUCT</Heading>}
                     </Box>
 
                     <Box bg='skyblue' h='80vh' p='30px'>
                         <Box display={'grid'} gap='6' gridTemplateColumns={"repeat(3,1fr)"}  >
                             <FormControl isRequired>
                                 <FormLabel>Category</FormLabel>
-                                <Select onChange={(e) => setcategory(e.target.value)}>
+                               {id?  <Select disabled onChange={(e) => setcategory(e.target.value)}>
                                     <option value="">Select Category</option>
                                     <option value="bluetoothHeadphone">BluetoothHeadphone</option>
                                     <option value="watch">Smart Watch</option>
                                     <option value="earbud">EarBud</option>
                                     <option value="speaker">Speaker</option>
                                     <option value="headphone">HeadPhone</option>
-                                </Select>
+                                </Select>:
+                              <Select onChange={(e) => setcategory(e.target.value)}>
+                              <option value="">Select Category</option>
+                              <option value="bluetoothHeadphone">BluetoothHeadphone</option>
+                              <option value="watch">Smart Watch</option>
+                              <option value="earbud">EarBud</option>
+                              <option value="speaker">Speaker</option>
+                              <option value="headphone">HeadPhone</option>
+                          </Select>  
+                                
+                                }
                             </FormControl>
 
                             <FormControl isRequired>
                                 <FormLabel>Title</FormLabel>
-                                <Input onChange={(e) => setproduct_item_meta__title(e.target.value)} placeholder='Enter Title' />
+                                <Input value={product_item_meta__title} onChange={(e) => setproduct_item_meta__title(e.target.value)} placeholder='Enter Title' />
                             </FormControl>
 
                             <FormControl isRequired>
                                 <FormLabel>Product Image</FormLabel>
-                                <Input onChange={(e) => setproduct_item__primary_image(e.target.value)} placeholder='Enter Url' type='url' />
+                                <Input value={product_item__primary_image} onChange={(e) => setproduct_item__primary_image(e.target.value)} placeholder='Enter Url' type='url' />
                             </FormControl>
 
                             <FormControl>
                                 <FormLabel>Product Secondary Image</FormLabel>
-                                <Input onChange={(e) => setproduct_item__secondary_image(e.target.value)} placeholder='Enter Url' type='url' />
+                                <Input value={product_item__secondary_image} onChange={(e) => setproduct_item__secondary_image(e.target.value)} placeholder='Enter Url' type='url' />
                             </FormControl>
 
                             <FormControl isRequired>
                                 <FormLabel>Original Price</FormLabel>
-                                <Input placeholder='Enter Price' onChange={(e) => setprice(e.target.value)} type='number' />
+                                <Input value={price} placeholder='Enter Price' onChange={(e) => setprice(e.target.value)} type='number' />
                             </FormControl>
 
                             <FormControl isRequired>
                                 <FormLabel>Discounted Price</FormLabel>
-                                <Input onChange={(e) => setprice2(e.target.value)} placeholder='Enter Price' type='number' />
+                                <Input value={price2} onChange={(e) => setprice2(e.target.value)} placeholder='Enter Price' type='number' />
                             </FormControl>
 
                             <FormControl isRequired>
                                 <FormLabel>Feature</FormLabel>
-                                <Input onChange={(e) => setfeature(e.target.value)} placeholder='Add Feature' />
+                                <Input value={feature} onChange={(e) => setfeature(e.target.value)} placeholder='Add Feature' />
                             </FormControl>
 
                             <FormControl>
                                 <FormLabel>Feature 2</FormLabel>
-                                <Input onChange={(e) => setfeature2(e.target.value)} placeholder='Add Feature' />
+                                <Input value={feature2} onChange={(e) => setfeature2(e.target.value)} placeholder='Add Feature' />
                             </FormControl>
 
                             <FormControl>
                                 <FormLabel>Feature 3</FormLabel>
-                                <Input onChange={(e) => setfeature3(e.target.value)} placeholder='Add Feature' />
+                                <Input value={feature3} onChange={(e) => setfeature3(e.target.value)} placeholder='Add Feature' />
                             </FormControl>
 
                             <FormControl is isRequired>
                                 <FormLabel>Priority</FormLabel>
-                                <Input onChange={(e) => setpriority(e.target.value)} placeholder='Add Priority' />
+                                <Input value={priority} onChange={(e) => setpriority(e.target.value)} placeholder='Add Priority' />
                             </FormControl>
 
                             <FormControl>
                                 <FormLabel>Priority 2</FormLabel>
-                                <Input onChange={(e) => setpriority2(e.target.value)} placeholder='Add Priority' />
+                                <Input value={priority2} onChange={(e) => setpriority2(e.target.value)} placeholder='Add Priority' />
                             </FormControl>
 
                             <FormControl >
                                 <FormLabel>Priority 3</FormLabel>
-                                <Input onChange={(e) => setpriority3(e.target.value)} placeholder='Add Priority' />
+                                <Input value={priority3} onChange={(e) => setpriority3(e.target.value)} placeholder='Add Priority' />
                             </FormControl>
 
 
                         </Box>
 
                         <Box mt='30px' textAlign={'center'}>
-                            <Button color={'white'} bg='blue.900'>Add Product</Button>
+                            {id ?<Button onClick={()=>handleEdit(singleprod[0]?._id)}  color={'white'} bg='blue.900'>Edit Product</Button>:<Button onClick={handleAdd} color={'white'} bg='blue.900'>Add Product</Button>}
                         </Box>
 
                     </Box>

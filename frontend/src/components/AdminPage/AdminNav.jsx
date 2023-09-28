@@ -1,5 +1,5 @@
 
-import { Box } from '@chakra-ui/react'
+import { Box, Heading, Text } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { GetData } from '../../redux/AppReducer/action'
@@ -13,7 +13,16 @@ export const AdminNav = () => {
     },[])
   return (
     <Box h='10vh' position={'sticky'} top='0' zIndex={'1000'} bg={'white'} >
-    navbar
+    <Box display={'flex'} alignItems={'center'} justifyContent={"center"} >
+       <Box>
+           <Box>
+                <Heading>Home</Heading>
+           </Box>
+           <Box>
+            <Text></Text>
+           </Box>
+        </Box>   
+    </Box>
    </Box>
   )
 }

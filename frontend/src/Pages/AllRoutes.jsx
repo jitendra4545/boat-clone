@@ -72,6 +72,13 @@ export const AllRoutes = () => {
       </RequiredAuth>
     } /> 
 
+<Route path='/admin/edit/:id'  element={<RequiredAuth>
+  <AddNewProd/>
+</RequiredAuth>}   />
+
+
+
+
     </Routes>
   )
 }
