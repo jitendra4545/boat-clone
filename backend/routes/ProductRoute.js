@@ -12,9 +12,21 @@ const ProductRouter = express.Router()
 // <----  THE CODE HEPLS TO GET ALL PRODUCTS ---->
 
 ProductRouter.get("/", async (req, res) => {
+    const {search}=req.query
     try {
-        let allData = await NewProductModel.find()
-        res.send(allData)
+        if(search){
+            let allData=await NewProductModel.find({
+                $or:[
+                    {product_item_meta__title:{ $regex: search, $options: "i" }},
+                    {category:{ $regex: search, $options: "i" }}
+                ]
+            })
+            res.send(allData)
+        }else{
+            let allData=await NewProductModel.find()
+            res.send(allData)
+        }
+        
     } catch (err) {
         res.send({ "msg": "somthing went wrong! cannot get the data", "error": err.message })
     }
