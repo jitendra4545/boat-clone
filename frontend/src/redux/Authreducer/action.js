@@ -96,7 +96,7 @@ const GetSingleUserSuccees = (payload) => {
 
 export const SingleUserData = () => (dispatch) => {
 
-    return fetch(`http://localhost:3200/user/single/`, {
+    return fetch(`https://hilarious-ox-lab-coat.cyclic.cloud/user/single/`, {
         headers: {
             "Content-Type": "application/json",
             "Authorization": JSON.parse(localStorage.getItem("token"))
@@ -114,7 +114,7 @@ export const SingleUserData = () => (dispatch) => {
 }
 
 export const UserLogout = () => (dispatch) => {
-    return fetch(`http://localhost:3200/user/logout/`, {
+    return fetch(`https://hilarious-ox-lab-coat.cyclic.cloud/user/logout/`, {
         method: "PATCH",
         headers: {
 
@@ -138,7 +138,7 @@ export const UserRegister = ({ name, email, mobile, password, isAdmin }) => (dis
         name, email, mobile, password, isAdmin
     }
 
-    return axios.post(`http://localhost:3200/user/register`, payload)
+    return axios.post(`https://hilarious-ox-lab-coat.cyclic.cloud/user/register`, payload)
         .then((res) => {
             if (res.data.msg == "You have been registered successfully") {
                 dispatch(UserRegisterSuccees())
@@ -168,7 +168,7 @@ export const UserLogin = ({ email, password }) => (dispatch) => {
         email, password
     }
 
-    return axios.post("http://localhost:3200/user/login", payload)
+    return axios.post("https://hilarious-ox-lab-coat.cyclic.cloud/user/login", payload)
         .then((res) => {
             if (res.data.token !== undefined) {
                 localStorage.setItem("token", JSON.stringify(res.data.token))
@@ -189,7 +189,7 @@ export const UserLogin = ({ email, password }) => (dispatch) => {
 
 export const UserDelete = ({ id }) => (dispatch) => {
     dispatch(UserDeletePending())
-  return  fetch(`http://localhost:3200/admin/user/${id}`, {
+  return  fetch(`https://hilarious-ox-lab-coat.cyclic.cloud/admin/user/${id}`, {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json",
@@ -210,7 +210,7 @@ export const UserDelete = ({ id }) => (dispatch) => {
 
 export const GetUser = () => (dispatch) => {
     dispatch(UserLoginPending())
-    axios.get("http://localhost:3200/user/alluser")
+    axios.get("https://hilarious-ox-lab-coat.cyclic.cloud/user/alluser")
         .then((res) => {
             console.log(res)
             dispatch(UsergetSuccees(res.data))

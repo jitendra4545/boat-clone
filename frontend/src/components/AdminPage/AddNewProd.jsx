@@ -8,8 +8,8 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 export const AddNewProd = () => {
 
-    const {isLoading,isError,singleprod}=useSelector((store)=>store.AppReducer)
-
+    const { isLoading, isError, product } = useSelector((store) => store.AppReducer)
+    // const [singleprod, setSingleprod] = useState("")
     const [category, setcategory] = useState("")
     const [price, setprice] = useState("")
     const [price2, setprice2] = useState("")
@@ -24,8 +24,8 @@ export const AddNewProd = () => {
     const [product_item__secondary_image, setproduct_item__secondary_image] = useState("")
 
 
-    const params=useParams()
-    const {id}=params
+    const params = useParams()
+    const { id } = params
 
     console.log(id)
 
@@ -33,9 +33,7 @@ export const AddNewProd = () => {
     const navigate = useNavigate()
     const handleAdd = () => {
         if (category == "" ||
-            price == "" || price2 == "" || product_item__primary_image == "" || 
-            product_item_meta__title == "" || priority == "" ||
-            feature == "") {
+            price == "" || price2 == "" || product_item__primary_image == "" || product_item_meta__title == "" || priority == "" || feature == "") {
             alert("Fill all the Fields")
         } else {
             const payload = {
@@ -48,38 +46,32 @@ export const AddNewProd = () => {
                 navigate('/admin/allproduct')
             })
         }
-
     }
 
-    useEffect(()=>{
-        if(id){
-            dispatch(GetSingleData({id}))
-            setproduct_item_meta__title(singleprod[0]?.product_item_meta__title)
-            setproduct_item__primary_image(singleprod[0]?.product_item__primary_image)
-            setproduct_item__secondary_image(singleprod[0]?.product_item__secondary_image)
-     setprice(singleprod[0]?.price)
-     setprice2(singleprod[0]?.price2)
-     setfeature(singleprod[0]?.feature)
-     setfeature2(singleprod[0]?.feature2)
-     setfeature3(singleprod[0]?.feature3)
-     setpriority(singleprod[0]?.priority)
-     setpriority2(singleprod[0]?.priority2)
-     setpriority3(singleprod[0]?.priority3)
+    useEffect(() => {
+        if (id) {
+            let singleprod = product.find(el => el._id === id)
+            setproduct_item_meta__title(singleprod?.product_item_meta__title)
+            setproduct_item__primary_image(singleprod?.product_item__primary_image)
+            setproduct_item__secondary_image(singleprod?.product_item__secondary_image)
+            setprice(singleprod?.price)
+            setprice2(singleprod?.price2)
+            setfeature(singleprod?.feature)
+            setfeature2(singleprod?.feature2)
+            setfeature3(singleprod?.feature3)
+            setpriority(singleprod?.priority)
+            setpriority2(singleprod?.priority2)
+            setpriority3(singleprod?.priority3)
+            setcategory(singleprod?.category)
         }
-     
-      
-    },[])
+    }, [])
 
-    console.log(singleprod)
 
-    const handleEdit=(id)=>{
-console.log(id)
-dispatch(EditData({id, category,
-    price, price2, product_item__primary_image, product_item__secondary_image,
-    product_item_meta__title, priority, priority2, priority3,
-    feature, feature2, feature3})).then(()=>{
-    navigate("/admin/allproduct")
-})
+
+const handleEdit = () => {
+        dispatch(EditData({id, category,price, price2, product_item__primary_image, product_item__secondary_image,product_item_meta__title, priority, priority2, priority3,feature, feature2, feature3})).then(() => {
+            navigate("/admin/allproduct")
+        })
     }
 
 
@@ -91,30 +83,30 @@ dispatch(EditData({id, category,
                 <AdminSidebar />
                 <Box border={'1px solid blue'} >
                     <Box color={'white'} bg='blue.900' paddingTop={'20px'} paddingBottom={'20px'} >
-                       {!id ?  <Heading textAlign={'center'} fontSize={'20px'}>ADD NEW PRODUCTS</Heading>: <Heading textAlign={'center'} fontSize={'20px'}>EDIT PRODUCT</Heading>}
+                        {!id ? <Heading textAlign={'center'} fontSize={'20px'}>ADD NEW PRODUCTS</Heading> : <Heading textAlign={'center'} fontSize={'20px'}>EDIT PRODUCT</Heading>}
                     </Box>
 
-                    <Box bg='skyblue' h='80vh' p='30px'>
+                    <Box  h='80vh' p='30px'>
                         <Box display={'grid'} gap='6' gridTemplateColumns={"repeat(3,1fr)"}  >
                             <FormControl isRequired>
                                 <FormLabel>Category</FormLabel>
-                               {id?  <Select disabled onChange={(e) => setcategory(e.target.value)}>
+                                {id ? <Select disabled onChange={(e) => setcategory(e.target.value)}>
                                     <option value="">Select Category</option>
                                     <option value="bluetoothHeadphone">BluetoothHeadphone</option>
                                     <option value="watch">Smart Watch</option>
                                     <option value="earbud">EarBud</option>
                                     <option value="speaker">Speaker</option>
                                     <option value="headphone">HeadPhone</option>
-                                </Select>:
-                              <Select onChange={(e) => setcategory(e.target.value)}>
-                              <option value="">Select Category</option>
-                              <option value="bluetoothHeadphone">BluetoothHeadphone</option>
-                              <option value="watch">Smart Watch</option>
-                              <option value="earbud">EarBud</option>
-                              <option value="speaker">Speaker</option>
-                              <option value="headphone">HeadPhone</option>
-                          </Select>  
-                                
+                                </Select> :
+                                    <Select onChange={(e) => setcategory(e.target.value)}>
+                                        <option value="">Select Category</option>
+                                        <option value="bluetoothHeadphone">BluetoothHeadphone</option>
+                                        <option value="watch">Smart Watch</option>
+                                        <option value="earbud">EarBud</option>
+                                        <option value="speaker">Speaker</option>
+                                        <option value="headphone">HeadPhone</option>
+                                    </Select>
+
                                 }
                             </FormControl>
 
@@ -177,7 +169,7 @@ dispatch(EditData({id, category,
                         </Box>
 
                         <Box mt='30px' textAlign={'center'}>
-                            {id ?<Button onClick={()=>handleEdit(singleprod[0]?._id)}  color={'white'} bg='blue.900'>Edit Product</Button>:<Button onClick={handleAdd} color={'white'} bg='blue.900'>Add Product</Button>}
+                            {id ? <Button onClick={handleEdit} color={'white'} bg='blue.900'>Edit Product</Button> : <Button onClick={handleAdd} color={'white'} bg='blue.900'>Add Product</Button>}
                         </Box>
 
                     </Box>

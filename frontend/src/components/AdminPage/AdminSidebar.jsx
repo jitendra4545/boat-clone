@@ -1,12 +1,23 @@
 import { Box, Heading } from '@chakra-ui/react'
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { BsBagPlusFill, BsCartPlus } from 'react-icons/bs'
 import { CgMore } from 'react-icons/cg'
 import { FiUsers } from 'react-icons/fi'
 import {MdDashboard} from 'react-icons/md'
 import { RiLogoutBoxLine } from 'react-icons/ri'
+import { useDispatch } from 'react-redux'
+import { UserLogout } from '../../redux/Authreducer/action'
 export const AdminSidebar = () => {
+  const dispatch=useDispatch()
+const navigate=useNavigate()
+    const handleLogout=()=>{
+      dispatch(UserLogout())
+      localStorage.removeItem("token")
+      // window.location.reload()
+      navigate("/")
+       
+    }
   return (
     <Box  >
     <Box  boxShadow={' 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);'} bg={'blue.900'} color={'white'} position={'fixed'} h='90vh'   left={0} display={'grid'} gap={'6'}  >
@@ -37,7 +48,7 @@ export const AdminSidebar = () => {
          </Box>
          </Link>
          <Link>
-         <Box mb={'20px'}  _hover={{bg:"white",color:"blue.900"}} p='10px 20px' display={'flex'} gap='4' fontSize={'20px'} justifyContent={'left'} alignItems={'center'} >
+         <Box mb={'20px'} onClick={handleLogout}  _hover={{bg:"white",color:"blue.900"}} p='10px 20px' display={'flex'} gap='4' fontSize={'20px'} justifyContent={'left'} alignItems={'center'} >
          <RiLogoutBoxLine/>  <Heading fontSize={'lg'}>  Logout</Heading>
          </Box>
          </Link>

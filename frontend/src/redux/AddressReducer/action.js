@@ -71,7 +71,7 @@ export const AddAddress=({name,mobile,pincode,address,city,state,landmark})=>(di
             name,mobile,pincode,address,city,state,landmark
          }
 
-       return  fetch(`http://localhost:3200/user/address`,{
+       return  fetch(`https://hilarious-ox-lab-coat.cyclic.cloud/user/address`,{
             method:"POST",
             headers:{
                 "Content-Type":"application/json",
@@ -92,7 +92,7 @@ export const AddAddress=({name,mobile,pincode,address,city,state,landmark})=>(di
 
 export const GetADdress = () => (dispatch) => {
     dispatch(AddressGetPending())
-    fetch(`http://localhost:3200/user/address`, {
+    fetch(`https://hilarious-ox-lab-coat.cyclic.cloud/user/address`, {
         headers: {
             "Authorization": JSON.parse(localStorage.getItem("token"))
         }
@@ -113,7 +113,7 @@ export const GetADdress = () => (dispatch) => {
 export const DeleteAddress=({id})=>(dispatch)=>{
     console.log("delete",id)
 dispatch(AddressDeletePending())
-   return fetch(`http://localhost:3200/user/address/${id}`,{
+   return fetch(`https://hilarious-ox-lab-coat.cyclic.cloud/user/address/${id}`,{
         method:"DELETE",
         headers:{
             "Content-Type":"application/json",

@@ -88,7 +88,7 @@ const CartDeletePending = () => {
 
 export const GetCart = () => (dispatch) => {
     dispatch(CartGetPending())
-    fetch(`http://localhost:3200/cart`, {
+    fetch(`https://hilarious-ox-lab-coat.cyclic.cloud/cart`, {
         headers: {
             "Authorization": JSON.parse(localStorage.getItem("token"))
         }
@@ -110,7 +110,7 @@ export const GetCart = () => (dispatch) => {
 
 export const CartAdd = ({ id }) => (dispatch) => {
     dispatch(CartAddPending())
-    return fetch(`http://localhost:3200/product/add_cart/${id}`, {
+    return fetch(`https://hilarious-ox-lab-coat.cyclic.cloud/product/add_cart/${id}`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -137,7 +137,7 @@ export const UpdateCart = ({ qty, id }) => (dispatch) => {
         qty = 1
     }
     dispatch(CartUpdatePending())
-    return fetch(`http://localhost:3200/product/cart/${id}`, {
+    return fetch(`https://hilarious-ox-lab-coat.cyclic.cloud/product/cart/${id}`, {
         method: "PATCH",
         headers: {
             "Content-Type": "application/json",
@@ -162,7 +162,7 @@ export const UpdateCart = ({ qty, id }) => (dispatch) => {
 export const DeleteCart=({id})=>(dispatch)=>{
     console.log("delete",id)
 dispatch(CartDeletePending())
-   return fetch(`http://localhost:3200/cart/${id}`,{
+   return fetch(`https://hilarious-ox-lab-coat.cyclic.cloud/cart/${id}`,{
         method:"DELETE",
         headers:{
             "Content-Type":"application/json",

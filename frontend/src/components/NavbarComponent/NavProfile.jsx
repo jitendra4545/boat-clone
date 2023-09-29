@@ -3,21 +3,21 @@ import React, { useEffect, useState } from 'react'
 import { CgProfile } from 'react-icons/cg'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
-import {  SingleUserData, UserLogout } from '../../redux/Authreducer/action'
+import { SingleUserData, UserLogout } from '../../redux/Authreducer/action'
 
 export const NavProfile = () => {
 
     const dispatch = useDispatch()
 
-    // let email = localStorage.getItem("email")
+
     useEffect(() => {
- 
- dispatch(SingleUserData())
- 
+
+        dispatch(SingleUserData())
+
     }, [])
 
 
-    const {ActiveUser} = useSelector((store) => store.AuthReducer)
+    const { ActiveUser } = useSelector((store) => store.AuthReducer)
 
     console.log("Active User", ActiveUser)
 
@@ -27,9 +27,8 @@ export const NavProfile = () => {
     const handleLogout = (id) => {
         dispatch(UserLogout())
         localStorage.removeItem("token")
-        window.location.reload()
         navigate("/")
-        
+
 
     }
     return (
@@ -61,7 +60,7 @@ export const NavProfile = () => {
                                     ActiveUser[0]?.isAdmin == true && <Link to='/admin'><Text _hover={{ fontWeight: "bold", color: "red" }} mt='15px'>AdminPage</Text></Link>
                                 }
                                 <Button
-                                    onClick={()=>handleLogout(ActiveUser[0]?._id)}
+                                    onClick={() => handleLogout(ActiveUser[0]?._id)}
                                     mt='15px' w='100%' color='white' _hover={{ backgroundColor: "red" }} bg='red'>Logout</Button>
                             </PopoverBody>
                             {/* <PopoverFooter>This is the footer</PopoverFooter> */}

@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Grid, GridItem, Heading, Image, Text, useDisclosure } from '@chakra-ui/react'
+import { Box, Button, Flex, Grid, GridItem, Heading, Image, Table, TableCaption, TableContainer, Tbody, Td, Text, Th, Thead, Tr, useDisclosure } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { Navbar } from '../components/Navbar'
 import { useDispatch, useSelector } from 'react-redux'
@@ -63,7 +63,7 @@ export const CartPage = () => {
                 </Box>
               </Flex>
               <hr />
-              <Box mt='20px' fontWeight={'bold'} textAlign={'center'} display={'grid'} gridTemplateColumns={'repeat(4,1fr)'}>
+              {/* <Box mt='20px' fontWeight={'bold'} textAlign={'center'} display={'grid'} gridTemplateColumns={'repeat(4,1fr)'}>
                 <Text>Product Details</Text>
 
                 <Text>Quantity</Text>
@@ -71,20 +71,42 @@ export const CartPage = () => {
                 <Text>Total Price</Text>
               </Box>
 
-              {
-                isLoading ? <Loader mt='20px' />
-
-                  :
-                  <Box mt='20px'>
-
-                    {cart?.map((el, i) => {
-                      return <CartCard {...el} />
-                    })}
-                  </Box>
-              }
+              
           
               {cart.length>0 && <Box mt='25px' textAlign={'center'}>
                <Link to='/earbud'> <Button bg={'white'} color={'skyblue'} margin={'auto'}>Continue Shopping</Button></Link>
+                </Box>} */}
+<TableContainer>
+  <Table  variant='simple'>
+    {/* <TableCaption>Imperial to metric conversion factors</TableCaption> */}
+    <Thead>
+      <Tr>
+        <Th fontSize={'15px'} color={'black'}>Image</Th>
+        <Th fontSize={'15px'} color={'black'}>Details</Th>
+        <Th fontSize={'15px'} color={'black'}>Quantity</Th>
+        <Th fontSize={'15px'} color={'black'}>Price</Th>
+        <Th fontSize={'15px'} color={'black'}>Total</Th>
+      </Tr>
+    </Thead>
+    <Tbody>
+    {
+                isLoading ? <Loader mt='20px' />
+
+                  :
+                 
+<>
+                    {cart?.map((el, i) => {
+                      return <CartCard {...el} />
+                    })}
+                 </>
+              }
+    </Tbody>
+    
+  </Table>
+</TableContainer>
+
+{cart.length>0 && <Box mt='25px' textAlign={'center'}>
+               <Link to='/earbud'> <Button bg={'white'} color={'red'} margin={'auto'}>Continue Shopping</Button></Link>
                 </Box>}
             </GridItem>
             <GridItem bg="blackAlpha.200" position={{ base: "", md: "", lg: "fixed" }} right={{ base: "", md: "", lg: "35px" }} p={{ base: "10px 50px", md: "20px 10px", lg: "30px 10px" }} boxShadow={'lg'} h={{ base: "auto", md: "auto", lg: 'auto' }} rowSpan={2}  >
@@ -101,7 +123,7 @@ export const CartPage = () => {
                 <Text>ITEMS {cart?.length}</Text>
                 <Text textAlign={'right'}>Rs. {TotalPrice} </Text>
               </Box>
-              <Box mt='15px'>
+              <Box mt='15px' w='100%'>
                 <CartPaymentCard total={TotalPrice} />
               </Box>
 

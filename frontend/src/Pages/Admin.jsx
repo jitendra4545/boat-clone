@@ -13,6 +13,9 @@ export const Admin = () => {
      <Box h='90vh' display={'grid'} gap='5' gridTemplateColumns={'230px auto'}>
        <AdminSidebar/>
        <Box  border={'1px solid blue'} >
+       <Box color={'white'} bg='blue.900' paddingTop={'20px'} paddingBottom={'20px'} >
+                         <Heading textAlign={'center'} fontSize={'20px'}>ADMIN DASHBOARD</Heading> 
+                    </Box>
             <Dashboard/>
        </Box>
      </Box>
