@@ -1,4 +1,4 @@
-import { Box, Button, Popover, PopoverArrow, PopoverBody, PopoverCloseButton, PopoverContent, PopoverHeader, PopoverTrigger, Portal, Text } from '@chakra-ui/react'
+import { Box, Button, Popover, PopoverArrow, PopoverBody, PopoverCloseButton, PopoverContent, PopoverHeader, PopoverTrigger, Portal, Text, useToast } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { CgProfile } from 'react-icons/cg'
 import { useDispatch, useSelector } from 'react-redux'
@@ -9,7 +9,7 @@ export const NavProfile = () => {
 
     const dispatch = useDispatch()
 
-
+const toast=useToast()
     useEffect(() => {
 
         dispatch(SingleUserData())
@@ -28,7 +28,14 @@ export const NavProfile = () => {
         dispatch(UserLogout())
         localStorage.removeItem("token")
         navigate("/")
-
+        toast({
+            title: 'Logout',
+            description: "Your Account Successfully Logged out",
+            status: 'warning',
+            duration: 5000,
+            isClosable: true,
+            position:'top'
+          })
 
     }
     return (

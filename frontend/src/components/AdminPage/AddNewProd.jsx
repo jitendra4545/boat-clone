@@ -5,9 +5,9 @@ import { AdminSidebar } from './AdminSidebar'
 import { useDispatch, useSelector } from 'react-redux'
 import { AddData, EditData, GetSingleData } from '../../redux/AppReducer/action'
 import { useNavigate, useParams } from 'react-router-dom'
-
+import { useToast } from '@chakra-ui/react'
 export const AddNewProd = () => {
-
+const toast=useToast()
     const { isLoading, isError, product } = useSelector((store) => store.AppReducer)
     // const [singleprod, setSingleprod] = useState("")
     const [category, setcategory] = useState("")
@@ -44,6 +44,14 @@ export const AddNewProd = () => {
             }
             dispatch(AddData(payload)).then(() => {
                 navigate('/admin/allproduct')
+                toast({
+                    title: 'New Product Added.',
+                    description: "Your Product Added Successfully.",
+                    status: 'success',
+                    duration: 5000,
+                    isClosable: true,
+                    position:'top'
+                  })
             })
         }
     }
@@ -71,6 +79,14 @@ export const AddNewProd = () => {
 const handleEdit = () => {
         dispatch(EditData({id, category,price, price2, product_item__primary_image, product_item__secondary_image,product_item_meta__title, priority, priority2, priority3,feature, feature2, feature3})).then(() => {
             navigate("/admin/allproduct")
+            toast({
+                title: 'Product Data Changed.',
+                description: "Your Product Edited Successfully.",
+                status: 'info',
+                duration: 5000,
+                isClosable: true,
+                position:'top'
+              })
         })
     }
 

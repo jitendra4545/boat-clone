@@ -1,4 +1,4 @@
-import { Box, Button, Table, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react'
+import { Box, Button, Table, Tbody, Td, Th, Thead, Tr, useToast } from '@chakra-ui/react'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AdminNav } from './AdminNav'
@@ -7,12 +7,22 @@ import { GetUser, UserDelete } from '../../redux/Authreducer/action'
 import { Loader } from '../Loader'
 
 export const AllUsers = () => {
+  const toast=useToast()
   const {isLoading,isError,users}=useSelector((store)=>store.AuthReducer)
   console.log(users)
+  
 const dispatch=useDispatch()
   const handleDelete=async(id)=>{
    dispatch(UserDelete({id})).then(()=>{
     dispatch(GetUser())
+    toast({
+      title: 'User Deleted',
+      description: "The user Deleted Successfully",
+      status: 'error',
+      duration: 5000,
+      isClosable: true,
+      position:'top'
+    })
    })    
   }
 

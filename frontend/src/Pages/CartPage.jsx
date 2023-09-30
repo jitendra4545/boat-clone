@@ -18,9 +18,10 @@ export const CartPage = () => {
   const [TotalPrice, setTotalPrice] = useState(0)
   let total = 0
   const handleTotal = () => {
-    cart?.map((el) => {
+  { cart &&  cart?.map((el) => {
       return (total += el.productID?.price * el.qty)
     })
+  }
     setTotalPrice(total)
   }
 
@@ -43,7 +44,7 @@ export const CartPage = () => {
       </Box>
       <Box m='auto' h='' p='30px 0px'>
         {
-          cart.length > 0 && <Grid
+          cart?.length > 0 && <Grid
             w={{ base: "99%", md: "95%", lg: "90%" }}
             m='auto'
 
@@ -105,7 +106,7 @@ export const CartPage = () => {
   </Table>
 </TableContainer>
 
-{cart.length>0 && <Box mt='25px' textAlign={'center'}>
+{cart?.length>0 && <Box mt='25px' textAlign={'center'}>
                <Link to='/earbud'> <Button bg={'white'} color={'red'} margin={'auto'}>Continue Shopping</Button></Link>
                 </Box>}
             </GridItem>
@@ -132,7 +133,7 @@ export const CartPage = () => {
         }
 
         {
-          (cart.length == 0 && isLoading==false )&& <Box mt='20px' display={'flex'} justifyContent={'center'} alignItems={'center'}>
+          (cart?.length == 0 && isLoading==false )&& <Box mt='20px' display={'flex'} justifyContent={'center'} alignItems={'center'}>
             <Box  >
               <Heading textAlign={'center'}>Your Cart is Empty!</Heading>
               <Image w='90%' src='https://cdn.dribbble.com/users/887568/screenshots/3172047/ufo.gif' />

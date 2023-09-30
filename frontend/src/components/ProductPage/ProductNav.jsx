@@ -5,11 +5,12 @@ import { CiFilter } from 'react-icons/ci'
 import { TbArrowsSort } from 'react-icons/tb'
 import { useDispatch } from 'react-redux'
 import { GetData } from '../../redux/AppReducer/action'
+import { Link } from 'react-router-dom'
 export const ProductNav = () => {
-
+const [search,setSearch]=useState("")
     const dispatch = useDispatch()
     useEffect(() => {
-        dispatch(GetData())
+        dispatch(GetData({search}))
     
       }, [])
 
@@ -33,10 +34,11 @@ export const ProductNav = () => {
                             Filter :
                         </MenuButton>
                         <MenuList p='20px' fontSize={'18px'}>
-                            <MenuItem _hover={{ borderRadius: '10px' }}>Smartphones</MenuItem>
-                            <MenuItem _hover={{ borderRadius: '10px' }}>Laptop</MenuItem>
-                            <MenuItem _hover={{ borderRadius: '10px' }}>Women Watches</MenuItem>
-                            <MenuItem _hover={{ borderRadius: '10px' }}>Men Watches</MenuItem>
+                            <Link to='/watch'><MenuItem _hover={{ borderRadius: '10px' }}>SmartWatch</MenuItem></Link>
+                            {/* <Link to='/earbud'><MenuItem _hover={{ borderRadius: '10px' }}>Earbud</MenuItem></Link> */}
+                            <Link to='/speaker'><MenuItem _hover={{ borderRadius: '10px' }}>Speaker</MenuItem></Link>
+                            <Link to='/headphone'><MenuItem _hover={{ borderRadius: '10px' }}>Headphone</MenuItem></Link>
+                            <Link to='/bluetoothHeadphone'><MenuItem _hover={{ borderRadius: '10px' }}>Bluetooth Headphone</MenuItem></Link>
                             {/* <MenuItem>New Arrivals</MenuItem> */}
                         </MenuList>
                     </Menu>

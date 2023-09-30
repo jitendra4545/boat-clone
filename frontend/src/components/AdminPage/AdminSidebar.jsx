@@ -27,7 +27,7 @@ const navigate=useNavigate()
          </Box>
          </Link>
         <Link to='/admin/allproduct' >
-         <Box _hover={{bg:"white",color:"blue.900"}} p='10px 20px' display={'flex'} gap='4' fontSize={'20px'} justifyContent={'left'} alignItems={'center'} >
+         <Box _focus={{ bg: "gray.100" }} _activeLink={{ bg: "orange.500", color: "white"}} _hover={{bg:"white",color:"blue.900"}} p='10px 20px' display={'flex'} gap='4' fontSize={'20px'} justifyContent={'left'} alignItems={'center'} >
          <BsCartPlus/>  <Heading fontSize={'lg'}>  Products</Heading>
          </Box>
          </Link>

@@ -1,5 +1,5 @@
-import { Box, Button, Image, Table, Tbody, Td, Th, Thead, Tr, useDisclosure } from '@chakra-ui/react'
-import React, { useEffect } from 'react'
+import { Box, Button, Image, Table, Tbody, Td, Th, Thead, Tr, useDisclosure, useToast } from '@chakra-ui/react'
+import React, { useEffect, useState } from 'react'
 import { AdminNav } from './AdminNav'
 import { AdminSidebar } from './AdminSidebar'
 import { useDispatch, useSelector } from 'react-redux'
@@ -10,12 +10,21 @@ import { Loader } from '../Loader'
 export const AllProducts = () => {
     const navigate=useNavigate()
 const dispatch=useDispatch()
+const [search, setSearch] = useState("")
     const { isLoading, isError, product } = useSelector((store) => store.AppReducer)
     console.log(product)
-          
+     const toast=useToast()     
 const handleDelete=(id)=>{
  dispatch(DeleteData({id})).then(()=>{
-    dispatch(GetData())
+    dispatch(GetData({search}))
+    toast({
+        title: 'Product Deleted',
+        description: "Your Product Deleted Successfully",
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+        position:'top'
+      })
  })
  console.log("erreerer",id)
 }

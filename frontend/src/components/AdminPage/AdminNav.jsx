@@ -1,5 +1,5 @@
 
-import { Avatar, Box, Button, Center, Flex, HStack, Heading, IconButton, Image, Input, Menu, MenuButton, MenuDivider, MenuItem, MenuList, Text, VStack } from '@chakra-ui/react'
+import { Avatar, Box, Button, Center, Flex, HStack, Heading, IconButton, Image, Input, Menu, MenuButton, MenuDivider, MenuItem, MenuList, Text, VStack, useToast } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { GetData } from '../../redux/AppReducer/action'
@@ -10,7 +10,7 @@ import { FiBell, FiChevronDown } from 'react-icons/fi'
 export const AdminNav = () => {
 const [search, setSearch] = useState("")
    const { ActiveUser } = useSelector((store) => store.AuthReducer)
-
+const toast=useToast()
    console.log("Active User", ActiveUser,search)
 
 
@@ -21,12 +21,20 @@ const navigate=useNavigate()
       localStorage.removeItem("token")
       // window.location.reload()
       navigate("/")
+      toast({
+        title: 'Logout',
+        description: "Your Account Successfully Logged out",
+        status: 'warning',
+        duration: 5000,
+        isClosable: true,
+        position:'top'
+      })
        
     }
 
 
     useEffect(()=>{
-       dispatch(GetData(search))
+       dispatch(GetData({search}))
        dispatch(GetUser())
        dispatch(SingleUserData())
     },[search])
@@ -41,7 +49,7 @@ const navigate=useNavigate()
            
            </Box>
            <Box display={'flex'}>
-          <Input onChange={(e)=>setSearch(e.target.value)} placeholder='Search products .....' /><Button mr='30px'>Search</Button>
+          <Input w='300px' borderRadius={'20px'} onChange={(e)=>setSearch(e.target.value)} placeholder='Search Products by Title or Catrgory .....' />
           
            </Box>
            <Box>
