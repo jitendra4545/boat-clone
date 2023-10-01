@@ -21,7 +21,7 @@ const selection1=[
     ]
 export const Slider4 = () => {
   return (
-    <Box>
+    <Box mb='25px'>
         <Box w='100%'m='auto' display={'flex'} justifyContent={'center'} gap={{base:"2",md:"7",lg:"10"}} alignItems={'center'}>
             {
                 selection1.map((el)=>{

@@ -11,6 +11,7 @@ import {
   Input,
   Stack,
   Image,
+  Spinner,
 } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -22,7 +23,7 @@ export default function LoginDetails() {
   const [email, setemail] = useState("")
   const [password, setpassword] = useState("")
 
-  const {token,user}=useSelector((store)=>store.AuthReducer)
+  const {token,user,isLoading}=useSelector((store)=>store.AuthReducer)
   console.log(token,user)
 
 
@@ -71,7 +72,7 @@ const navigate=useNavigate()
             </Stack>
             <Text textAlign={'left'}>Don't Have Any Account ? <Link to='/register'><span style={{ color: 'Blue' }}>Register here</span> </Link></Text>
             <Button onClick={handleLogin} color={'white'} bg={'blue'} _hover={{ backgroundColor: "blue" }} variant={'solid'}>
-              Sign in
+           {isLoading? <Spinner size='sm' />:"Sign in"}   
             </Button>
 
           </Stack>

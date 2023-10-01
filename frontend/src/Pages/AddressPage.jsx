@@ -85,31 +85,6 @@ export const AddressPage = () => {
 
           <GridItem bg='skyblue' boxShadow={'lg'} borderRadius={'10px 0px 0px 10px'} p={{ base: "10px 0px", md: "20px 20px", lg: "30px 70px" }} colSpan={4}  >
           
-                {/* <Box mt='20px' fontWeight={'bold'} gap='5' textAlign={'left'} display={'grid'} gridTemplateColumns={'repeat(5,1fr)'}>
-                  <Text>Name</Text>
-
-                  <Text>Address</Text>
-                  <Text>Pincode</Text>
-                  <Text>Mobile</Text>
-                  <Text>Choose/Remove</Text>
-                </Box> */}
-                
-             
-            
-
-            {/* {
-              isLoading ? <Loader />
-
-                :
-                <Box mt='20px'>
-
-                  {Address?.map((el, i) => {
-                    return <AddressCard {...el} />
-                  })}
-                </Box>
-
-            } */}
-
 {
   Address.length>0 &&
  <>
@@ -122,7 +97,6 @@ export const AddressPage = () => {
   <hr />
   <TableContainer>
   <Table  variant='simple'>
-    {/* <TableCaption>Imperial to metric conversion factors</TableCaption> */}
     <Thead>
       <Tr>
         <Th fontSize={'15px'} color={'black'}>Name</Th>

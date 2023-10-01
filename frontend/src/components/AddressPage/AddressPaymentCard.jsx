@@ -30,11 +30,7 @@ const handlePayment=()=>{
 
             navigate("/")
           },
-          // prefill: {
-          //   name:"Velmurugan",
-          //   email:"mvel1620r@gmail.com",
-          //   contact:"7904425033"
-          // },
+          
           notes:{
             address:"Razorpay Corporate office"
           },

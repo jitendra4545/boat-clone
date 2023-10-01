@@ -119,18 +119,25 @@ export const Slider2 = () => {
   return (
     
     <>
-    <Box w='95%' m='auto'   overflowX={'scroll'} overflowY={'hidden'}>
-      <Box p='0px 20px' display={'grid'} gridTemplateColumns={'repeat(17,1fr)'} gap='7' w='2500px'>
+    <Box w='95%' display={'flex'} maxH={'150px'} gap={'7'} m='auto' sx={
+     { 
+    '::-webkit-scrollbar':{
+           display:'none'
+       }
+    }
+  }   overflowX={'auto'}
+   >
+      
       {
         category.map((el, i) => {
 
-          return <Box bg={'white'} borderRadius={'10px 10px 0px 0px'} boxShadow={'rgba(0, 0, 0, 0.24) 0px 3px 8px'} p='10px 10px' >
-            <Image w='100%'  src={el.image} />
+          return <Box bg={'white'} minW={'120px'} h='150px' borderRadius={'10px 10px 0px 0px'} boxShadow={'rgba(0, 0, 0, 0.24) 0px 3px 8px'} p='5px 5px' >
+            <Image w='100px'  src={el.image} />
             <Text fontWeight={'semibold'} textAlign={'center'}>{el.name}</Text>
           </Box>
         })
       }
-      </Box>
+      
      
     </Box>
 
