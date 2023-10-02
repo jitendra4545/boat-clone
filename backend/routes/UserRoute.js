@@ -20,10 +20,10 @@ UserRouter.post("/register", async (req, res) => {
     console.log(data)
     
     try {
-      let single=  await UserModel.findOne({email:data.email})
+      let single=  await UserModel.find({email:data.email})
       
        
-        if(single){
+        if(single.length>0){
             res.send({ "msg": "Email Already Registered ! Enter a new email", "error": err.message })
         }else{
             bcrypt.hash(data.password, 8, async function (err, hash) {

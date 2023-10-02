@@ -12,7 +12,7 @@ const ProductRouter = express.Router()
 // <----  THE CODE HEPLS TO GET ALL PRODUCTS ---->
 
 ProductRouter.get("/", async (req, res) => {
-    const {search}=req.query
+    const {search,order,filter}=req.query
     try {
         if(search){
             let allData=await NewProductModel.find({
@@ -22,7 +22,8 @@ ProductRouter.get("/", async (req, res) => {
                 ]
             })
             res.send(allData)
-        }else{
+        }else
+{
             let allData=await NewProductModel.find()
             res.send(allData)
         }
@@ -66,20 +67,7 @@ ProductRouter.post(`/add_cart/:id`, Authorization, async (req, res) => {
 
 
 
-// ProductRouter.get("/cart",Authorization,async(req,res)=>{
-//     let id= req.body.UserId
-//     console.log(id)    
-//     try{
-//          let allData=await CartModel.find({UserId:id}).populate("productID")
-//          res.send(allData)
-//     }catch(err){
-// res.send(err)
-//     }
-// })
 
-
-
-// <----  THE CODE HEPLS TO UPDATE ALL THE CART CART DATA ---->
 
 
 ProductRouter.patch("/cart/:id", Authorization, async (req, res) => {
