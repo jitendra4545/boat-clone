@@ -1,6 +1,7 @@
 import axios from "axios"
 import { USER_GET_PENDING } from "../Authreducer/actionTypes"
 import { PRODUCT_DELETE_FAILURE, PRODUCT_DELETE_PENDING, PRODUCT_DELETE_SUCCESS, PRODUCT_EDIT_FAILURE, PRODUCT_EDIT_PENDING, PRODUCT_EDIT_SUCCESS, PRODUCT_GET_FAILURE, PRODUCT_GET_PENDING, PRODUCT_GET_SUCCESS, PRODUCT_POST_FAILURE, PRODUCT_POST_PENDING, PRODUCT_POST_SUCCESS, SINGLE_PRODUCT_GET_FAILURE, SINGLE_PRODUCT_GET_PENDING, SINGLE_PRODUCT_GET_SUCCESS } from "./actionTypes"
+import { API } from "../../assest/api"
 
 
 
@@ -106,7 +107,7 @@ const SingleProductGetPending = () => {
 export const AddData = (payload) => (dispatch) => {
 
     dispatch(ProductPostPending())
-    return fetch(`https://hilarious-ox-lab-coat.cyclic.cloud/admin/product/add`, {
+    return fetch(`${API}/admin/product/add`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -128,7 +129,7 @@ export const AddData = (payload) => (dispatch) => {
 
 export const DeleteData = ({ id }) => (dispatch) => {
     dispatch(ProductDeletePending())
-    return fetch(`https://hilarious-ox-lab-coat.cyclic.cloud/admin/product/${id}`, {
+    return fetch(`${API}/admin/product/${id}`, {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json",
@@ -161,7 +162,7 @@ export const EditData = ({ id, category,
         }
 
         dispatch(ProductEditPending())
-        return fetch(`https://hilarious-ox-lab-coat.cyclic.cloud/admin/product/${id}`, {
+        return fetch(`${API}/admin/product/${id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
@@ -187,7 +188,7 @@ export const EditData = ({ id, category,
 
 export const GetData = ({search}) => (dispatch) => {
     dispatch(ProductGetPending())
-    axios.get(`https://hilarious-ox-lab-coat.cyclic.cloud/product?search=${search}`)
+    axios.get(`${API}/product?search=${search}`)
         .then((res) => {
             console.log(res)
             dispatch(ProductGetSuccees(res.data))
@@ -205,7 +206,7 @@ export const GetData = ({search}) => (dispatch) => {
 
 export const GetSingleData = ({ id }) => (dispatch) => {
     dispatch(SingleProductGetPending())
-    axios.get(`https://hilarious-ox-lab-coat.cyclic.cloud/product/${id}`)
+    axios.get(`${API}/product/${id}`)
         .then((res) => {
 
             dispatch(SingleProductGetSuccees(res.data))

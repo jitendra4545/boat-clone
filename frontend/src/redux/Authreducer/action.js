@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import { SINGLE_USER_SUCCESS, USER_DELETE_FAILURE, USER_DELETE_PENDING, USER_DELETE_SUCCESS, USER_GET_FAILURE, USER_GET_PENDING, USER_GET_SUCCESS, USER_LOGIN_FAILURE, USER_LOGIN_PENDING, USER_LOGIN_SUCCESS, USER_LOGOUT_SUCCESS, USER_REGISTER_FAILURE, USER_REGISTER_PENDING, USER_REGISTER_SUCCESS } from "./actionTypes"
 import axios from 'axios'
+import { API } from "../../assest/api"
 
 const UserRegisterSuccees = (payload) => {
     return {
@@ -96,14 +97,13 @@ const GetSingleUserSuccees = (payload) => {
 
 export const SingleUserData = () => (dispatch) => {
 
-    return fetch(`https://hilarious-ox-lab-coat.cyclic.cloud/user/single/`, {
+    return fetch(`${API}/user/single/`, {
         headers: {
             "Content-Type": "application/json",
             "Authorization": JSON.parse(localStorage.getItem("token"))
         }
     }).then((res) => res.json())
         .then((res) => {
-            // console.log("Singleffffffffffff", res)
             dispatch(GetSingleUserSuccees(res))
 
         }).catch((err) => {
@@ -114,7 +114,7 @@ export const SingleUserData = () => (dispatch) => {
 }
 
 export const UserLogout = () => (dispatch) => {
-    return fetch(`https://hilarious-ox-lab-coat.cyclic.cloud/user/logout/`, {
+    return fetch(`${API}/user/logout/`, {
         method: "PATCH",
         headers: {
 
@@ -138,9 +138,10 @@ export const UserRegister = ({ name, email, mobile, password, isAdmin }) => (dis
         name, email, mobile, password, isAdmin
     }
 
-    return axios.post(`https://hilarious-ox-lab-coat.cyclic.cloud/user/register`, payload)
+    return axios.post(`${API}/user/register`, payload)
         .then((res) => {
             if (res.data.msg == "You have been registered successfully") {
+                alert(res.data.msg)
                 dispatch(UserRegisterSuccees())
             } else {
                 alert(res.data.msg)
@@ -168,7 +169,7 @@ export const UserLogin = ({ email, password }) => (dispatch) => {
         email, password
     }
 
-    return axios.post("https://hilarious-ox-lab-coat.cyclic.cloud/user/login", payload)
+    return axios.post(`${API}/user/login`, payload)
         .then((res) => {
             if (res.data.token !== undefined) {
                 localStorage.setItem("token", JSON.stringify(res.data.token))
@@ -189,7 +190,7 @@ export const UserLogin = ({ email, password }) => (dispatch) => {
 
 export const UserDelete = ({ id }) => (dispatch) => {
     dispatch(UserDeletePending())
-  return  fetch(`https://hilarious-ox-lab-coat.cyclic.cloud/admin/user/${id}`, {
+    return fetch(`${API}/admin/user/${id}`, {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json",
@@ -210,7 +211,7 @@ export const UserDelete = ({ id }) => (dispatch) => {
 
 export const GetUser = () => (dispatch) => {
     dispatch(UserLoginPending())
-    axios.get("https://hilarious-ox-lab-coat.cyclic.cloud/user/alluser")
+    axios.get(`${API}/user/alluser`)
         .then((res) => {
             console.log(res)
             dispatch(UsergetSuccees(res.data))

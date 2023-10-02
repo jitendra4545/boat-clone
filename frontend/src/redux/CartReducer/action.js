@@ -1,5 +1,6 @@
 import axios from "axios"
 import { CART_ADD_FAILURE, CART_ADD_PENDING, CART_ADD_SUCCESS, CART_DELETE_FAILURE, CART_DELETE_PENDING, CART_DELETE_SUCCESS, CART_GET_FAILURE, CART_GET_PENDING, CART_GET_SUCCESS, CART_UPDATE_FAILURE, CART_UPDATE_PENDING, CART_UPDATE_SUCCESS } from "./actionTypes"
+import { API } from "../../assest/api"
 
 const token = JSON.parse(localStorage.getItem('token'))
 
@@ -88,7 +89,7 @@ const CartDeletePending = () => {
 
 export const GetCart = () => (dispatch) => {
     dispatch(CartGetPending())
-    fetch(`https://hilarious-ox-lab-coat.cyclic.cloud/cart`, {
+    fetch(`${API}/cart`, {
         headers: {
             "Authorization": JSON.parse(localStorage.getItem("token"))
         }
@@ -110,7 +111,7 @@ export const GetCart = () => (dispatch) => {
 
 export const CartAdd = ({ id }) => (dispatch) => {
     dispatch(CartAddPending())
-    return fetch(`https://hilarious-ox-lab-coat.cyclic.cloud/product/add_cart/${id}`, {
+    return fetch(`${API}/product/add_cart/${id}`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -137,7 +138,7 @@ export const UpdateCart = ({ qty, id }) => (dispatch) => {
         qty = 1
     }
     dispatch(CartUpdatePending())
-    return fetch(`https://hilarious-ox-lab-coat.cyclic.cloud/product/cart/${id}`, {
+    return fetch(`${API}/product/cart/${id}`, {
         method: "PATCH",
         headers: {
             "Content-Type": "application/json",
@@ -162,7 +163,7 @@ export const UpdateCart = ({ qty, id }) => (dispatch) => {
 export const DeleteCart=({id})=>(dispatch)=>{
     console.log("delete",id)
 dispatch(CartDeletePending())
-   return fetch(`https://hilarious-ox-lab-coat.cyclic.cloud/cart/${id}`,{
+   return fetch(`${API}/cart/${id}`,{
         method:"DELETE",
         headers:{
             "Content-Type":"application/json",

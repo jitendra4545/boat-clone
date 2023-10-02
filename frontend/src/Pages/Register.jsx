@@ -12,6 +12,7 @@ import {
     Stack,
     Image,
     Box,
+    Spinner,
 } from '@chakra-ui/react'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
@@ -27,13 +28,20 @@ const [password, setpassword] = useState("")
 const [isAdmin, setAdmin] = useState(false)
 const dispatch=useDispatch()
 const navigate=useNavigate()
+const [loading,setLoading]=useState(false)
 // console.log(password)
 // console.log(UserRegister())
 const handleRegister=async()=>{
-     dispatch(UserRegister({name,email,password,isAdmin,mobile})).then((res)=>{
-     console.log(res)
-        navigate('/login')
-     })
+    if(name==""||email==""||password==""||mobile==""){
+alert("Fill All the fields")
+    }else{
+        dispatch(UserRegister({name,email,password,isAdmin,mobile})).then((res)=>{
+            console.log(res)
+               navigate('/login')
+            })
+            setLoading(true)
+    }
+     
 }
 
 
@@ -87,8 +95,18 @@ const handleRegister=async()=>{
                     <Stack spacing={6}>
                     <Text textAlign={'left'}>Already Registered ? <Link to='/login'><span style={{color:'Blue'}}>Login here</span> </Link></Text>
                         <Button onClick={handleRegister} color={'white'} bg={'blue'} _hover={{backgroundColor:"blue"}} variant={'solid'}>
-                            Register
+                         Register
                         </Button>
+                        {
+                            loading ? 
+                            <Button disabled onClick={handleRegister} color={'white'} bg={'blue'} _hover={{backgroundColor:"blue"}} variant={'solid'}>
+                            <Spinner size={'md'}/> 
+                           </Button>
+                           :
+                           <Button onClick={handleRegister} color={'white'} bg={'blue'} _hover={{backgroundColor:"blue"}} variant={'solid'}>
+                         Register
+                        </Button>
+                        }
 
                     </Stack>
                 </Stack>

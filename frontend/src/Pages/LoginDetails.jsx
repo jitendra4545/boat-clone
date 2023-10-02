@@ -12,6 +12,7 @@ import {
   Stack,
   Image,
   Spinner,
+  useToast,
 } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -25,16 +26,28 @@ export default function LoginDetails() {
 
   const {token,user,isLoading}=useSelector((store)=>store.AuthReducer)
   console.log(token,user)
-
+const toast=useToast()
 
   const dispatch=useDispatch()
 const navigate=useNavigate()
   const handleLogin=async()=>{
+    if(password==""||email==""){
+      toast({
+        title: 'Please Fill All the Fields',
+        description: " password and Email ",
+        status: 'warning',
+        duration: 5000,
+        position:"top",
+        isClosable: true,
+    })
+    }else{
       dispatch(UserLogin({email,password})).then(()=>{
-       localStorage.setItem("email",(email))
-        navigate("/")
+        localStorage.setItem("email",(email))
+         navigate("/")
+      
+       })
+    }
      
-      })
   }
 
 
@@ -43,7 +56,7 @@ const navigate=useNavigate()
     <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
       <Flex flex={1}>
         <Image
-          // w='100%'
+          
           alt={'Login Image'}
           objectFit={'cover'}
           src={
@@ -71,9 +84,17 @@ const navigate=useNavigate()
               <Text color={'blue.500'}>Forgot password?</Text>
             </Stack>
             <Text textAlign={'left'}>Don't Have Any Account ? <Link to='/register'><span style={{ color: 'Blue' }}>Register here</span> </Link></Text>
-            <Button onClick={handleLogin} color={'white'} bg={'blue'} _hover={{ backgroundColor: "blue" }} variant={'solid'}>
-           {isLoading? <Spinner size='sm' />:"Sign in"}   
-            </Button>
+           
+
+            {isLoading ? 
+              <Button disabled  onClick={handleLogin} color={'white'} bg={'grey'} _hover={{ backgroundColor: "grey" }} variant={'solid'}>
+            <Spinner size={'md'}/> Please Wait .... 
+               </Button>
+               :
+               <Button  onClick={handleLogin} color={'white'} bg={'blue'} _hover={{ backgroundColor: "blue" }} variant={'solid'}>
+               Sign in   
+                </Button>
+          }
 
           </Stack>
         </Stack>

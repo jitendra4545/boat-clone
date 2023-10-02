@@ -1,3 +1,4 @@
+import { API } from "../../assest/api"
 import { ADDRESS_ADD_FAILURE, ADDRESS_ADD_PENDING, ADDRESS_ADD_SUCCESS, ADDRESS_DELETE_FAILURE, ADDRESS_DELETE_PENDING, ADDRESS_DELETE_SUCCESS, ADDRESS_GET_FAILURE, ADDRESS_GET_PENDING, ADDRESS_GET_SUCCESS } from "./actionTypes"
 
 const token = JSON.parse(localStorage.getItem('token'))
@@ -71,7 +72,7 @@ export const AddAddress=({name,mobile,pincode,address,city,state,landmark})=>(di
             name,mobile,pincode,address,city,state,landmark
          }
 
-       return  fetch(`https://hilarious-ox-lab-coat.cyclic.cloud/user/address`,{
+       return  fetch(`${API}/user/address`,{
             method:"POST",
             headers:{
                 "Content-Type":"application/json",
@@ -92,7 +93,7 @@ export const AddAddress=({name,mobile,pincode,address,city,state,landmark})=>(di
 
 export const GetADdress = () => (dispatch) => {
     dispatch(AddressGetPending())
-    fetch(`https://hilarious-ox-lab-coat.cyclic.cloud/user/address`, {
+    fetch(`${API}/user/address`, {
         headers: {
             "Authorization": JSON.parse(localStorage.getItem("token"))
         }
@@ -113,7 +114,7 @@ export const GetADdress = () => (dispatch) => {
 export const DeleteAddress=({id})=>(dispatch)=>{
     console.log("delete",id)
 dispatch(AddressDeletePending())
-   return fetch(`https://hilarious-ox-lab-coat.cyclic.cloud/user/address/${id}`,{
+   return fetch(`${API}/user/address/${id}`,{
         method:"DELETE",
         headers:{
             "Content-Type":"application/json",

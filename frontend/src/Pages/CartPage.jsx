@@ -77,6 +77,14 @@ export const CartPage = () => {
               {cart.length>0 && <Box mt='25px' textAlign={'center'}>
                <Link to='/earbud'> <Button bg={'white'} color={'skyblue'} margin={'auto'}>Continue Shopping</Button></Link>
                 </Box>} */}
+
+{
+  isLoading ? <Loader/>
+
+
+  :
+
+
 <TableContainer>
   <Table  variant='simple'>
     {/* <TableCaption>Imperial to metric conversion factors</TableCaption> */}
@@ -90,22 +98,22 @@ export const CartPage = () => {
       </Tr>
     </Thead>
     <Tbody>
-    {
+    {/* {
                 isLoading ? <Loader mt='20px' />
 
-                  :
+                  : */}
                  
 <>
                     {cart?.map((el, i) => {
                       return <CartCard {...el} />
                     })}
                  </>
-              }
+              {/* } */}
     </Tbody>
     
   </Table>
 </TableContainer>
-
+}
 {cart?.length>0 && <Box mt='25px' textAlign={'center'}>
                <Link to='/earbud'> <Button bg={'white'} color={'red'} margin={'auto'}>Continue Shopping</Button></Link>
                 </Box>}

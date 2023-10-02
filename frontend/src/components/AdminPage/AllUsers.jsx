@@ -48,6 +48,7 @@ return (
                     <Th color={'white'} fontSize={'20px'}>EMAIL</Th>
                     <Th color={'white'} fontSize={'20px'}>MOBILE</Th>
                     <Th color={'white'} fontSize={'20px'}>ACTIVE</Th>
+                    <Th color={'white'} fontSize={'20px'}>ADMIN</Th>
                     <Th color={'white'} fontSize={'20px'}>CREATED AT</Th>
                     {/* <Th color={'white'} fontSize={'20px'}>DISCOUNT</Th> */}
                     
@@ -70,6 +71,9 @@ return (
                               </Td>
                               <Td>
                                   {el.isActive ? "Active":"In-Active"}
+                              </Td>
+                              <Td>
+                                {el.isAdmin?"True":"False"}
                               </Td>
                               <Td>
                                   {el.createdAt}
