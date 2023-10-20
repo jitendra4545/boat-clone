@@ -94,9 +94,7 @@ alert("Fill All the fields")
 
                     <Stack spacing={6}>
                     <Text textAlign={'left'}>Already Registered ? <Link to='/login'><span style={{color:'Blue'}}>Login here</span> </Link></Text>
-                        <Button onClick={handleRegister} color={'white'} bg={'blue'} _hover={{backgroundColor:"blue"}} variant={'solid'}>
-                         Register
-                        </Button>
+                        
                         {
                             loading ? 
                             <Button disabled onClick={handleRegister} color={'white'} bg={'blue'} _hover={{backgroundColor:"blue"}} variant={'solid'}>
