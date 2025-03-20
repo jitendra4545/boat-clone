@@ -12,7 +12,7 @@ UserRouter.get("/", (req, res) => {
     res.send('UserPage')
 })
 
-// <----  THE CODE HEPLS TO REGISTER A NEW USER ---->
+// <----  THE CODE HELP TO REGISTER A NEW USER ---->
 
 
 UserRouter.post("/register", async (req, res) => {
@@ -48,7 +48,7 @@ UserRouter.post("/register", async (req, res) => {
     }
 })
 
-// <----  THE CODE HEPLS TO LOGIN USER ---->
+// <----  THE CODE HELPS TO LOGIN USER ---->
 
 UserRouter.post("/login", async (req, res) => {
     let data = req.body
